@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1277.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.RegistrarController">
+   <children>
+      <JFXDialog fx:id="dialog" prefWidth="884.0" />
+      <AnchorPane id="AnchorPane" fx:id="base" prefHeight="660.0" prefWidth="1277.0" style="-fx-background-color: #03306C;">
+         <children>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="61.0" prefHeight="70.0" prefWidth="208.0" text="Registrar" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Regular" size="48.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="53.0" fitWidth="60.0" layoutX="221.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons8-registro-100.png" />
+               </image>
+            </ImageView>
+            <Line endX="143.0" layoutX="117.0" layoutY="131.0" startX="-100.0" stroke="#ff914d" strokeWidth="5.0" />
+            <JFXComboBox fx:id="cbdocumento" focusColor="#fa731f" layoutX="430.0" layoutY="54.0" prefHeight="75.0" prefWidth="383.0" promptText="Seleccione un tipo de documento" stylesheets="@../css/cssvistas.css" unFocusColor="#fa731f" visibleRowCount="3">
+               <styleClass>
+                  <String fx:value="jfx-combo-box" />
+                  <String fx:value="combo-box" />
+                  <String fx:value="list-cell" />
+                  <String fx:value="list-view" />
+               </styleClass>
+            </JFXComboBox>
+            <Pane fx:id="paneTesis" layoutX="-1.0" layoutY="154.0" prefHeight="495.0" prefWidth="1285.0" style="-fx-background-color: #03306C; -fx-border-color: #03306C;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" layoutX="11.0" layoutY="-4.0" prefHeight="491.0" prefWidth="1271.0">
+                     <children>
+                        <VBox prefHeight="336.0" prefWidth="361.0">
+                           <children>
+                              <Label prefHeight="28.0" prefWidth="362.0" text="Titulo" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="texttitulo" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Autor(es)" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textautor" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Cedula autor(es)" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textcedula" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Codigo de Tesis" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="codtesis" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Carrera" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </Label>
+                              <JFXComboBox fx:id="cbcarrera" focusColor="#fa731f" prefHeight="49.0" prefWidth="361.0" promptText="Seleccione una carrera" stylesheets="@../css/cssvistas.css" unFocusColor="#ffa977" visibleRowCount="3">
+                                 <styleClass>
+                                    <String fx:value="jfx-combo-box2" />
+                                    <String fx:value="list-cell" />
+                                    <String fx:value="list-view" />
+                                 </styleClass>
+                                 <padding>
+                                    <Insets right="45.0" />
+                                 </padding>
+                              </JFXComboBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="80.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="336.0" prefWidth="361.0">
+                           <children>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Fecha de publicación" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="fecha" prefHeight="39.0" prefWidth="321.0" stylesheets="@../css/cssdatepicker.css">
+                                 <styleClass>
+                                    <String fx:value="arrow" />
+                                    <String fx:value="arrow-button" />
+                                    <String fx:value="button" />
+                                    <String fx:value="cell" />
+                                    <String fx:value="date-picker" />
+                                    <String fx:value="date-picker-popup" />
+                                    <String fx:value="label" />
+                                    <String fx:value="left-arrow" />
+                                    <String fx:value="month-year-pane" />
+                                    <String fx:value="right-arrow" />
+                                    <String fx:value="selected" />
+                                    <String fx:value="spinner" />
+                                    <String fx:value="week-number-cell" />
+                                 </styleClass>
+                              </DatePicker>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Selección de archivo PDF" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="16.0" />
+                                 </padding>
+                              </Label>
+                              <JFXButton fx:id="btnbuscararchivo" onMouseClicked="#openFileChooser" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Buscar archivo" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Seleccionar paginas de indice" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="16.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgindice" onMouseClicked="#abrirDialogo" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Indice" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Seleccionar pagina resumen" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="16.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgresumen" onMouseClicked="#abrirDialogoResumen" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Resumen" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Visualizar portada" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="18.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgportada" onMouseClicked="#abrirDialogoPortada" prefHeight="42.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Portada" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="485.0" prefWidth="128.0">
+                           <children>
+                              <ImageView fx:id="imgarchivo" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="93.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgindice" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="35.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgresumen" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgportada" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="btnregistrar" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="-13.0" layoutY="1.0" onMouseClicked="#onRegistrarButtonClick" prefHeight="55.0" prefWidth="127.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Registrar" textFill="#fbfcfc">
+                                       <font>
+                                          <Font name="Open Sans Bold" size="19.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                    <ImageView fitHeight="42.0" fitWidth="39.0" layoutX="90.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/icons8-salida-100.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="10.0" top="6.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane fx:id="paneInforme" layoutX="-1.0" layoutY="154.0" prefHeight="495.0" prefWidth="1285.0" style="-fx-background-color: #03306C; -fx-border-color: #03306C;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" layoutX="11.0" layoutY="-4.0" prefHeight="491.0" prefWidth="1271.0">
+                     <children>
+                        <VBox prefHeight="336.0" prefWidth="361.0">
+                           <children>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Titulo" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="texttitulo2" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Autor(es)" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textautor2" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Cedula autor(es)" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textcedula2" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Empresa" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textempresa" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Carrera" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="25.0" />
+                                 </padding>
+                              </Label>
+                              <JFXComboBox fx:id="cbcarrera2" focusColor="#fa731f" prefHeight="49.0" prefWidth="361.0" promptText="Seleccione una carrera" stylesheets="@../css/cssvistas.css" unFocusColor="#ffa977" visibleRowCount="3">
+                                 <styleClass>
+                                    <String fx:value="jfx-combo-box2" />
+                                    <String fx:value="list-cell" />
+                                    <String fx:value="list-view" />
+                                 </styleClass>
+                                 <padding>
+                                    <Insets right="45.0" />
+                                 </padding>
+                              </JFXComboBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="80.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="336.0" prefWidth="361.0">
+                           <children>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Fecha de publicación" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="fecha2" prefHeight="39.0" prefWidth="321.0" stylesheets="@../css/cssdatepicker.css">
+                                 <styleClass>
+                                    <String fx:value="arrow" />
+                                    <String fx:value="arrow-button" />
+                                    <String fx:value="button" />
+                                    <String fx:value="cell" />
+                                    <String fx:value="date-picker" />
+                                    <String fx:value="date-picker-popup" />
+                                    <String fx:value="label" />
+                                    <String fx:value="left-arrow" />
+                                    <String fx:value="month-year-pane" />
+                                    <String fx:value="right-arrow" />
+                                    <String fx:value="selected" />
+                                    <String fx:value="spinner" />
+                                    <String fx:value="week-number-cell" />
+                                 </styleClass>
+                              </DatePicker>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Selección de archivo PDF" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="16.0" />
+                                 </padding>
+                              </Label>
+                              <JFXButton fx:id="btnbuscararchivo2" onMouseClicked="#openFileChooser" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Buscar archivo" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Seleccionar paginas de indice" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="16.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgindice2" onMouseClicked="#abrirDialogo" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Indice" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Seleccionar pagina resumen" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="16.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgresumen2" onMouseClicked="#abrirDialogoResumen" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Resumen" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Visualizar portada" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="18.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgportada2" onMouseClicked="#abrirDialogoPortada" prefHeight="42.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Portada" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="485.0" prefWidth="128.0">
+                           <children>
+                              <ImageView fx:id="imgarchivo2" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="93.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgindice2" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="35.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgresumen2" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgportada2" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="btnregistrar2" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="-13.0" layoutY="1.0" onMouseClicked="#onRegistrarinformeButtonClick" prefHeight="55.0" prefWidth="127.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Registrar" textFill="#fbfcfc">
+                                       <font>
+                                          <Font name="Open Sans Bold" size="19.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                    <ImageView fitHeight="42.0" fitWidth="39.0" layoutX="90.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/icons8-salida-100.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane fx:id="panelibros" layoutX="-1.0" layoutY="154.0" prefHeight="495.0" prefWidth="1285.0" style="-fx-background-color: #03306C; -fx-border-color: #03306C;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="491.0" prefWidth="1271.0">
+                     <children>
+                        <VBox prefHeight="336.0" prefWidth="361.0">
+                           <children>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Titulo" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="texttitulo3" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Autor(es)" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="15.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textautor3" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Editorial" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="15.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="texteditorial" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Edición" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="15.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textedicion" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Estante" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="15.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textestante" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Codigo de Lomo" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="15.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="textlomo" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                           </children>
+                           <HBox.margin>
+                              <Insets right="80.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="336.0" prefWidth="361.0">
+                           <children>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Fecha de publicación" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="fecha3" prefHeight="39.0" prefWidth="321.0" stylesheets="@../css/cssdatepicker.css">
+                                 <styleClass>
+                                    <String fx:value="arrow" />
+                                    <String fx:value="arrow-button" />
+                                    <String fx:value="button" />
+                                    <String fx:value="cell" />
+                                    <String fx:value="date-picker" />
+                                    <String fx:value="date-picker-popup" />
+                                    <String fx:value="label" />
+                                    <String fx:value="left-arrow" />
+                                    <String fx:value="month-year-pane" />
+                                    <String fx:value="right-arrow" />
+                                    <String fx:value="selected" />
+                                    <String fx:value="spinner" />
+                                    <String fx:value="week-number-cell" />
+                                 </styleClass>
+                              </DatePicker>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Selección de archivo PDF" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="16.0" />
+                                 </padding>
+                              </Label>
+                              <JFXButton fx:id="btnbuscararchivo3" onMouseClicked="#openFileChooser" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Buscar archivo" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Seleccionar paginas de indice" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="16.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgindice3" onMouseClicked="#abrirDialogo" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Indice" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Seleccionar pagina resumen" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="16.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgresumen3" onMouseClicked="#abrirDialogoResumen" prefHeight="34.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Resumen" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Visualizar portada" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="18.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton fx:id="btnimgportada3" onMouseClicked="#abrirDialogoPortada" prefHeight="42.0" prefWidth="356.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Portada" textFill="#fbfcfc">
+                                 <font>
+                                    <Font name="Open Sans Bold" size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="485.0" prefWidth="128.0">
+                           <children>
+                              <ImageView fx:id="imgarchivo3" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="93.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgindice3" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="35.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgresumen3" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="imgportada3" fitHeight="56.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/neinei.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="btnregistrar3" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="-13.0" layoutY="1.0" onMouseClicked="#onRegistrarlibroButtonClick" prefHeight="55.0" prefWidth="127.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Registrar" textFill="#fbfcfc">
+                                       <font>
+                                          <Font name="Open Sans Bold" size="19.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                    <ImageView fitHeight="42.0" fitWidth="39.0" layoutX="90.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/icons8-salida-100.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane fx:id="paneini" layoutX="-1.0" layoutY="154.0" prefHeight="495.0" prefWidth="1285.0" style="-fx-background-color: #03306C; -fx-border-color: #03306C;">
+               <children>
+                  <ImageView fx:id="logopsm" fitHeight="226.0" fitWidth="239.0" layoutX="504.0" layoutY="59.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/logo_psm_dorado-removebg-preview.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="138.0" radius="58.302499999999995" spread="0.18" width="97.21" />
+                     </effect>
+                  </ImageView>
+                  <ImageView fx:id="logobanda" fitHeight="110.0" fitWidth="295.0" layoutX="472.0" layoutY="230.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../img/tira%20del%20logo.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="88.42" radius="47.3725" spread="0.2" width="103.07" />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+            <JFXButton fx:id="btnvolver" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="1073.0" layoutY="66.0" onMouseClicked="#volver" prefHeight="55.0" prefWidth="127.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Volver" textFill="#fbfcfc">
+               <font>
+                  <Font name="Open Sans Bold" size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="42.0" fitWidth="39.0" layoutX="1155.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons8-salida-100.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

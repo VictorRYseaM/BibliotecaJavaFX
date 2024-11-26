@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="1277.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.IniproController">
+   <children>
+      <Label alignment="BASELINE_CENTER" layoutX="297.0" layoutY="296.0" prefHeight="70.0" prefWidth="746.0" text="Pagina de inicio que inicia xd">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

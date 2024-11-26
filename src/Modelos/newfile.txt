@@ -1,0 +1,23 @@
+
+Importante, en los modelos van las clases de los objetos es decir
+que si estoy haciendo un libro en el modelo va la clase libro con sus 
+atributos y metodos y para pasarlo es asi:
+
+private Persona persona
+
+
+..
+
+this.persona = new Persona();
+
+al momento de pasarlo de un controlador o ventana a otra es
+
+PersonaDialogController controlador = loader.getController();
+controlador.initAtributtes(personas);
+
+Persona p = controlador.getpersona();
+
+Para cerrar cosas tambien puede ser
+
+Stage stage = (Stage) this.button.getScene().getWindow();
+stage.close

@@ -1,0 +1,38 @@
+
+
+.text-field:focused {
+    -fx-text-box-border:#FFFFFF;
+}
+
+.button
+{
+    -fx-border-radius: 4px;
+}
+
+.linear-grad2{
+   -fx-background-color: linear-gradient(from 0.5% 0.1% to 80% 80%, #0a0a24, #03306c);
+   /* Voy a abusar de esta linea jsjsjsjs*/
+}
+
+.text-field
+{
+    -fx-prompt-text-fill: #465058;
+    -fx-text-inner-color:#FBFCFC;
+    -fx-font-size:15px;
+    -fx-font-family: "Open Sans";
+    -fx-border-radius: 4px;
+
+}
+.custom-jfx-text-field {
+    -fx-prompt-text-fill: white; /* Cambia el color aquí según tus preferencias */
+    -fx-text-inner-color: white; /* Cambia el color del texto ingresado */
+    -fx-font-family: "Open Sans";
+    -fx-font-size: 19px;
+}
+.custom-jfx-text-field2 {
+    -fx-prompt-text-fill: #DDDDDD; /* Cambia el color aquí según tus preferencias */
+    -fx-text-inner-color: white; /* Cambia el color del texto ingresado */
+    -fx-font-family: "Open Sans";
+    -fx-font-size: 16px;
+}
+

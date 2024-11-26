@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1277.0" style="-fx-background-color: #03306C;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.BuscarController">
+   <children>
+      <Label alignment="CENTER" layoutX="7.0" layoutY="15.0" prefHeight="42.0" prefWidth="107.0" text="Buscar" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Regular" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="109.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/icons8-búsqueda-120.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="logopsm" fitHeight="54.0" fitWidth="53.0" layoutX="39.0" layoutY="83.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logo_psm_dorado-removebg-preview.png" />
+         </image>
+         <effect>
+            <DropShadow height="138.0" radius="58.302499999999995" spread="0.18" width="97.21" />
+         </effect>
+      </ImageView>
+      <Line endX="34.75" layoutX="110.0" layoutY="59.0" startX="-100.0" stroke="#ff914d" strokeWidth="5.0" />
+      <JFXButton fx:id="btnvolver" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="1127.0" layoutY="602.0" prefHeight="55.0" prefWidth="127.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Volver" textFill="#fbfcfc">
+         <font>
+            <Font name="Open Sans Bold" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fitHeight="42.0" fitWidth="39.0" layoutX="1210.0" layoutY="608.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/icons8-salida-100.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="logobanda" fitHeight="29.0" fitWidth="87.0" layoutX="21.0" layoutY="118.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/tira%20del%20logo.png" />
+         </image>
+         <effect>
+            <DropShadow height="88.42" radius="47.3725" spread="0.2" width="103.07" />
+         </effect>
+      </ImageView>
+      <AnchorPane fx:id="panetoolbar" layoutX="115.0" layoutY="84.0" prefHeight="62.0" prefWidth="1152.0" />
+      <VBox layoutX="7.0" layoutY="180.0" prefHeight="415.0" prefWidth="1259.0" style="-fx-background-color: white; -fx-background-radius: 30;" />
+   </children>
+</AnchorPane>

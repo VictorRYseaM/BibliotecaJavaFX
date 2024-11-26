@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1280.0" styleClass="linear-grad2" stylesheets="@../css/Lgoin.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.Login_nuevoController">
+   <children>
+      <Line endX="100.0" layoutX="781.0" layoutY="326.0" rotate="90.0" startX="-463.8296813964844" stroke="#ff914d" strokeWidth="5.0" />
+      
+      <JFXButton layoutX="765.0" layoutY="477.0" text="Forgot Password ?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="971.0" layoutY="478.0" text="Questions ?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btningresar" layoutX="745.0" layoutY="393.0" onAction="#PantallaInicio" prefHeight="55.0" prefWidth="380.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Ingresar" textFill="#fbfcfc">
+         <font>
+            <Font name="Open Sans Bold" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXTextField fx:id="txtuser" focusColor="#fa731f" layoutX="745.0" layoutY="180.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="380.0" promptText="Usuario" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+         <font>
+            <Font name="Open Sans Regular" size="19.0" />
+         </font>
+      </JFXTextField>
+      <Pane fx:id="panelogo" layoutX="93.0" layoutY="110.0" onMouseClicked="#animacionlogo" prefHeight="457.0" prefWidth="412.0">
+         <children>
+            <ImageView fx:id="logopsm" fitHeight="327.0" fitWidth="339.0" layoutX="37.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/logo_psm_dorado-removebg-preview.png" />
+               </image>
+               <effect>
+                  <DropShadow height="138.0" radius="58.302499999999995" spread="0.18" width="97.21" />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="logobanda" fitHeight="136.0" fitWidth="438.0" layoutX="-19.0" layoutY="261.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/tira%20del%20logo.png" />
+               </image>
+               <effect>
+                  <DropShadow height="88.42" radius="47.3725" spread="0.2" width="103.07" />
+               </effect>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <JFXPasswordField fx:id="txtpass" focusColor="#fa731f" layoutX="745.0" layoutY="267.0" prefHeight="42.0" prefWidth="380.0" promptText="Contraseña" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+         <font>
+            <Font name="Open Sans Regular" size="19.0" />
+         </font>
+      </JFXPasswordField>
+   </children>
+</AnchorPane>

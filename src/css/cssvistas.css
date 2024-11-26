@@ -1,0 +1,77 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 18 nov. 2024, 12:16:06?a. m.
+    Author     : VictorY
+*/
+
+/* Estilo para el ComboBox de JFoenix */
+
+.jfx-combo-box {
+    -fx-font-size: 19px; /* Tamaño de la fuente */
+    -fx-font-family: "Open Sans", sans-serif; /* Fuente Open Sans */
+    -fx-font-weight: bold; /* Negrita */
+    -fx-text-fill: white; /* Texto blanco en el campo del combo */
+    -fx-prompt-text-fill: white; /* Texto del prompt en blanco */
+}
+.jfx-combo-box2 {
+    -fx-font-size: 16px; /* Tamaño de la fuente */
+    -fx-font-family: "Open Sans", sans-serif; /* Fuente Open Sans */
+    -fx-font-weight: bold; /* Negrita */
+    -fx-text-fill: white; /* Texto blanco en el campo del combo */
+    -fx-prompt-text-fill: white; /* Texto del prompt en blanco */
+}
+
+/* outer combo-box text */
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-font-weight: bold; /* Negrita en los elementos */
+}
+
+/* combo-box list view text, not hovered or focused */
+.combo-box .list-view .list-cell {
+    -fx-text-fill: black;
+    -fx-font-weight: bold; /* Negrita en los elementos del listado */
+}
+
+/* combo-box selected text */
+.combo-box .list-view .list-cell:focused {
+    -fx-background-color : #FA731F;  /* Cadet Blue */
+    -fx-text-fill: white;
+    -fx-font-weight: bold; /* Negrita en el texto seleccionado */
+}
+
+/* combo-box hover text */
+.combo-box .list-view .list-cell:hover {
+    -fx-background-color : #FA731F;  /* Cadet Blue */
+    -fx-text-fill: white;
+    -fx-font-weight: bold; /* Negrita en el texto cuando pasa el mouse */
+}
+.jfx-date-picker {
+    -fx-font-size: 16px; /* Tamaño de la fuente */
+    -fx-font-family: "Open Sans", sans-serif; /* Fuente Open Sans */
+    -fx-font-weight: bold; /* Negrita */
+    -fx-prompt-text-fill: white; /* Color del texto del prompt */
+    -fx-text-fill: white; /* Color del texto */
+}
+
+.jfx-date-picker .input-line {
+    /* Color de la barra inferior */
+    -fx-unfocus-color: #ffa977;
+    -fx-stroke: black; 
+}
+
+.jfx-date-picker .input-line:focused {
+    -fx-stroke: #ffa977; /* Color de la barra inferior al enfocar */
+}
+
+.jfx-date-picker > .jfx-text-field{
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
+}
+
+.jfx-date-picker .jfx-text-field {
+    -jfx-unfocus-color: #ffa977; /* Cambia este color al que desees */
+}
