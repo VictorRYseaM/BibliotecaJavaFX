@@ -4,16 +4,31 @@
  */
 package Modelos;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
+import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 
 /**
  *
  * @author VictorY
  */
 public class Buscarmodel {
+
+    Documento doc = new Documento();
 
     public Buscarmodel() {
     }
@@ -74,5 +89,88 @@ public class Buscarmodel {
 
         return editoriales;
     }
- 
+
+    public List<Documento> buscarDocumentos(String textoBusqueda, String tipoFiltro, String filtroAdicional, String valorAdicional) {
+        List<Documento> resultados = new ArrayList<>();
+        String sqlBase = "SELECT id_documento, titulo, autor, img_portada FROM documento";
+        String sql = "";
+
+        try (java.sql.Connection con = new Conexion().conectar(); PreparedStatement pst = prepararConsulta(con, sqlBase, textoBusqueda, tipoFiltro, filtroAdicional, valorAdicional); ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+
+                doc.setId_documento(rs.getInt("id_documento"));
+                doc.setTitulo(rs.getString("Titulo"));
+                doc.setAutor(rs.getString("Autor"));
+                doc.setImg_portada(rs.getBytes("Img_portada"));
+                resultados.add(doc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultados;
+    }
+
+    private PreparedStatement prepararConsulta(Connection con, String sqlBase, String textoBusqueda, String tipoFiltro, String filtroAdicional, String valorAdicional) throws SQLException {
+        StringBuilder consulta = new StringBuilder(sqlBase);
+        List<Object> parametros = new ArrayList<>();
+
+        // Filtro base por texto de búsqueda (Título o Autor)
+        if (textoBusqueda != null && !textoBusqueda.isEmpty()) {
+            consulta.append(" WHERE (titulo LIKE ? OR autor LIKE ?)");
+            parametros.add("%" + textoBusqueda + "%");
+            parametros.add("%" + textoBusqueda + "%");
+        }
+
+        // Filtro por tipo de documento
+        if (tipoFiltro != null && !tipoFiltro.isEmpty()) {
+            consulta.append((parametros.isEmpty() ? " WHERE" : " AND") + " tipo = ?");
+            parametros.add(tipoFiltro);
+        }
+
+        // Filtros adicionales (Carrera o Cédula)
+        if (filtroAdicional != null && !filtroAdicional.isEmpty()) {
+            String tablaAdicional = tipoFiltro.equalsIgnoreCase("Trabajos de Grado") ? "tesis" : "informepasantia";
+            consulta.append(" AND id_documento IN (SELECT id_documento FROM " + tablaAdicional + " WHERE " + filtroAdicional + " = ?)");
+            parametros.add(valorAdicional);
+        }
+
+        // Filtro específico para cédula
+        if ("cedula".equalsIgnoreCase(filtroAdicional) && valorAdicional != null && !valorAdicional.isEmpty()) {
+            String tablaCedula = tipoFiltro.equalsIgnoreCase("Trabajos de Grado") ? "tesis" : "informepasantia";
+            consulta.append(" AND id_documento IN (SELECT id_documento FROM " + tablaCedula + " WHERE cedula = ?)");
+            parametros.add(valorAdicional);
+        }
+
+        PreparedStatement pst = con.prepareStatement(consulta.toString());
+        for (int i = 0; i < parametros.size(); i++) {
+            pst.setObject(i + 1, parametros.get(i));
+        }
+        return pst;
+    }
+
+    public static Image convertPdfToImage(File pdfFile) throws IOException {
+        try (PDDocument document = Loader.loadPDF(pdfFile)) {
+            PDFRenderer renderer = new PDFRenderer(document);
+
+            // Renderizar la primera página como una imagen
+            BufferedImage bufferedImage = renderer.renderImageWithDPI(0, 150); // 150 DPI para calidad moderada
+
+            // Convertir BufferedImage a InputStream para JavaFX Image
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", outputStream);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+            return new Image(inputStream);
+        }
+    }
+
+    public static File savePdfToTempFile(byte[] pdfData) throws IOException {
+        File tempFile = File.createTempFile("tempPdf", ".pdf");
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            fos.write(pdfData);
+        }
+        return tempFile;
+    }
+
 }

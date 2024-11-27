@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="1259.0" styleClass="anchorpane" stylesheets="@../css/cssvistas.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.DocumentoController">
+   <children>
+      <HBox alignment="CENTER" layoutX="174.0" layoutY="24.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="1259.0" spacing="20.0" styleClass="hbox" stylesheets="@../css/cssvistas.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imgv" fitHeight="103.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/perrito%20tiste.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="labelv" prefHeight="61.0" prefWidth="1088.0" text="Label">
+               <font>
+                  <Font name="Open Sans Regular" size="33.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

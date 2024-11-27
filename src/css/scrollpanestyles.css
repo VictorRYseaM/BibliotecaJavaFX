@@ -1,0 +1,54 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 26 nov. 2024, 8:02:15?a. m.
+    Author     : VictorY
+*/
+
+/* Estilo para el ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-radius: 10px;
+    -fx-padding: 5px;
+}
+
+/* Estilo para la caja de contenido dentro del ScrollPane */
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Estilo para la barra de desplazamiento vertical */
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0 5px 0 5px; /* Espacio a los lados de la barra */
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #FA731F; /* Color del thumb */
+    -fx-background-radius: 10px;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #e0e0e0; /* Color de la pista */
+    -fx-background-radius: 10px;
+}
+
+/* Estilo para la barra de desplazamiento horizontal */
+.scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 5px 0 5px 0; /* Espacio arriba y abajo de la barra */
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: #4CAF50; /* Color del thumb */
+    -fx-background-radius: 10px;
+}
+
+.scroll-pane .scroll-bar:horizontal .track {
+    -fx-background-color: #e0e0e0; /* Color de la pista */
+    -fx-background-radius: 10px;
+}

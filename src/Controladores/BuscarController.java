@@ -5,6 +5,11 @@
 package Controladores;
 
 import Modelos.Buscarmodel;
+import Modelos.Documento;
+import Modelos.InformePasantia;
+import Modelos.Libro;
+import Modelos.TrabajoGrado;
+import animatefx.animation.FadeIn;
 import animatefx.animation.FadeInLeft;
 import animatefx.animation.FadeInRight;
 import animatefx.animation.GlowBackground;
@@ -12,22 +17,35 @@ import animatefx.animation.Pulse;
 import animatefx.animation.Tada;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXToolbar;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -40,16 +58,53 @@ public class BuscarController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
+    private VBox itemholder = null;
+    @FXML
     private AnchorPane panetoolbar;
+    @FXML
+    private ScrollPane scroll;
 
     private HBox toolbarContent;
     private Buscarmodel filtroscb = new Buscarmodel();
+    private Buscarmodel busquedamdl = new Buscarmodel();
+    private Buscarmodel pdfimg = new Buscarmodel();
+
+    private JFXComboBox<String> pricingType; // ComboBox para tipo de documento
+    private TextField searchField;          // Campo de texto para búsqueda
+    private HBox filtrosAdicionales;
+    public List<Documento> resultados;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         crearBarraDeBusqueda();
 
+        scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Ocultar barra horizontal
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Mostrar barra vertical cuando sea necesario
+        scroll.setFitToWidth(true); // Ajustar contenido al ancho del ScrollPane
+
+// Crear los nodos dinámicamente
+        Node[] nodes = new Node[10]; // Puedes cambiar 10 por la cantidad que necesites
+
+        for (int i = 0; i < nodes.length; i++) {
+            try {
+                final int j = i;
+
+                // Cargar nodo FXML
+                nodes[i] = FXMLLoader.load(getClass().getResource("/Vistas/documento.fxml"));
+
+                // Cambiar color al pasar el mouse
+                nodes[i].setOnMouseEntered(event -> nodes[j].setStyle("-fx-background-color: #FA731F"));
+                nodes[i].setOnMouseExited(event -> nodes[j].setStyle("-fx-background-color: white"));
+
+                // Agregar nodo al VBox
+                itemholder.getChildren().add(nodes[i]);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     private void crearBarraDeBusqueda() {
@@ -57,7 +112,7 @@ public class BuscarController implements Initializable {
         JFXToolbar toolbar = new JFXToolbar();
 
         // TextField para búsqueda
-        TextField searchField = new TextField();
+        searchField = new TextField();
         searchField.setPromptText("Ingrese datos para realizar la busqueda");
         searchField.setPrefWidth(550); // Ancho
         searchField.setPrefHeight(40); // Altura
@@ -100,7 +155,7 @@ public class BuscarController implements Initializable {
         searchBox.setSpacing(5); // Separación mínima entre el TextField y el botón
 
         // ComboBox para tipos de filtros
-        JFXComboBox<String> pricingType = new JFXComboBox<>();
+        pricingType = new JFXComboBox<>();
         pricingType.getItems().addAll("Todos", "Trabajos de Grado", "Informes de Pasantia", "Libros");
         pricingType.setValue("Todos");
         pricingType.setStyle("-fx-border-color: #FA731F; "
@@ -114,10 +169,10 @@ public class BuscarController implements Initializable {
         pricingType.setPrefWidth(150); // Ancho del ComboBox
 
         // Crear HBox para los filtros adicionales
-        HBox filtrosAdicionales = new HBox();
+        filtrosAdicionales = new HBox();
         filtrosAdicionales.setSpacing(10);
         filtrosAdicionales.setAlignment(Pos.CENTER_LEFT); // Alineación de los filtros
-        
+
         // Agregar un manejador de eventos para cuando se cambia la selección del ComboBox
         pricingType.setOnAction(event -> {
             String tipoSeleccionado = pricingType.getValue();  // Obtiene el valor seleccionado
@@ -149,6 +204,8 @@ public class BuscarController implements Initializable {
         AnchorPane.setLeftAnchor(toolbar, 0.0);
         AnchorPane.setRightAnchor(toolbar, 0.0);
         AnchorPane.setBottomAnchor(toolbar, 0.0); // Ojo con esto, si no quieres que se pegue al fondo
+
+        searchButton.setOnAction(event -> realizarBusqueda());
     }
 
     private void crearFiltrosPorTipo(String tipo, HBox filtrosAdicionales) {
@@ -169,7 +226,7 @@ public class BuscarController implements Initializable {
 
             // Agregar años del 2024 al 2014
             for (int i = year; i >= (year - 10); i--) {
-                yearFilter.getItems().add(year);
+                yearFilter.getItems().add(i);
             }
             yearFilter.setPromptText("Año");
 
@@ -224,4 +281,82 @@ public class BuscarController implements Initializable {
             filtrosAdicionales.getChildren().addAll(authorFilter, editorFilter);
         }
     }
+
+    private void realizarBusqueda() {
+        String tipoSeleccionado = pricingType.getValue(); // Obtener el tipo de documento seleccionado
+        String textoBusqueda = searchField.getText().trim(); // Texto ingresado en el TextField
+
+        // Inicializar variables para filtros adicionales
+        String filtroAdicional = null;
+        String valorAdicional = null;
+
+        // Obtener filtros adicionales según el tipo seleccionado
+        if (tipoSeleccionado.equals("Trabajos de Grado") || tipoSeleccionado.equals("Informes de Pasantia")) {
+            for (Node nodo : filtrosAdicionales.getChildren()) {
+                if (nodo instanceof JFXComboBox<?>) {
+                    JFXComboBox<?> comboBox = (JFXComboBox<?>) nodo;
+
+                    // Suponiendo que hay un filtro para carrera
+                    if (comboBox.getId() != null && comboBox.getId().equals("carreraFilter")) {
+                        filtroAdicional = "carrera"; // Clave para el filtro en la consulta
+                        valorAdicional = comboBox.getValue() != null ? comboBox.getValue().toString() : null;
+                    }
+                    // Otro filtro específico como año o cédula
+                    if (comboBox.getId() != null && comboBox.getId().equals("cedulaFilter")) {
+                        filtroAdicional = "cedula";
+                        valorAdicional = comboBox.getValue() != null ? comboBox.getValue().toString() : null;
+                    }
+                }
+            }
+        }
+
+        // Llamar al modelo con filtros
+        resultados = busquedamdl.buscarDocumentos(
+                textoBusqueda,
+                tipoSeleccionado.equals("Todos") ? null : tipoSeleccionado,
+                filtroAdicional,
+                valorAdicional
+        );
+
+        // Actualizar la interfaz gráfica con los resultados
+        actualizarResultadosEnUI(resultados);
+    }
+
+    public void actualizarResultadosEnUI(List<Documento> docus) {
+
+        docus.stream().forEach(d -> d.getdatos());
+        itemholder.getChildren().clear(); // Limpiar VBox antes de agregar nuevos resultados
+
+        for (Documento documento : resultados) {
+            try {
+                // Cargar nodo FXML
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/documento.fxml"));
+                Node nodo = loader.load();
+
+                // Obtener el controlador del nodo
+                DocumentoController controller = loader.getController();
+
+                byte[] pdfdata = documento.getImg_portada();
+                File pdfFile = pdfimg.savePdfToTempFile(pdfdata);
+                Image imagenPortada = pdfimg.convertPdfToImage(pdfFile);
+
+                // Configurar datos del nodo
+                controller.setData(documento.getTitulo(), imagenPortada);
+                
+                // Cambiar estilo al pasar el mouse
+                nodo.setOnMouseEntered(event -> nodo.setStyle("-fx-background-color: #FA731F"));
+                nodo.setOnMouseExited(event -> nodo.setStyle("-fx-background-color: white"));
+
+                // Agregar nodo al VBox
+                itemholder.getChildren().add(nodo);
+                pdfFile.delete();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 }

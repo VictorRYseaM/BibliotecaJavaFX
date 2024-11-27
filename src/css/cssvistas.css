@@ -75,3 +75,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .jfx-date-picker .jfx-text-field {
     -jfx-unfocus-color: #ffa977; /* Cambia este color al que desees */
 }
+
+.hbox {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}
+
+.anchorpane {
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}
+
+
+.zoomed-image {
+    -fx-fit-width: 200px; /* Cambia este valor según necesites */
+    -fx-fit-height: 300px; /* Cambia este valor según necesites */
+    -fx-preserve-ratio: true; /* Mantiene la proporción de la imagen */
+}
