@@ -90,19 +90,18 @@ public class Buscarmodel {
         return editoriales;
     }
 
-    public List<Documento> buscarDocumentos(String textoBusqueda, String tipoFiltro, String filtroAdicional, String valorAdicional) {
+    public List<Documento> buscarDocumentos(String textoBusqueda, String tipoFiltro, Map<String, String> filtrosAdicionales) {
         List<Documento> resultados = new ArrayList<>();
         String sqlBase = "SELECT id_documento, titulo, autor, img_portada FROM documento";
-        String sql = "";
 
-        try (java.sql.Connection con = new Conexion().conectar(); PreparedStatement pst = prepararConsulta(con, sqlBase, textoBusqueda, tipoFiltro, filtroAdicional, valorAdicional); ResultSet rs = pst.executeQuery()) {
+        try (java.sql.Connection con = new Conexion().conectar(); PreparedStatement pst = prepararConsulta(con, sqlBase, textoBusqueda, tipoFiltro, filtrosAdicionales); ResultSet rs = pst.executeQuery()) {
 
             while (rs.next()) {
-
+                Documento doc = new Documento();
                 doc.setId_documento(rs.getInt("id_documento"));
-                doc.setTitulo(rs.getString("Titulo"));
-                doc.setAutor(rs.getString("Autor"));
-                doc.setImg_portada(rs.getBytes("Img_portada"));
+                doc.setTitulo(rs.getString("titulo"));
+                doc.setAutor(rs.getString("autor"));
+                doc.setImg_portada(rs.getBytes("img_portada"));
                 resultados.add(doc);
             }
         } catch (SQLException e) {
@@ -111,7 +110,7 @@ public class Buscarmodel {
         return resultados;
     }
 
-    private PreparedStatement prepararConsulta(Connection con, String sqlBase, String textoBusqueda, String tipoFiltro, String filtroAdicional, String valorAdicional) throws SQLException {
+    private PreparedStatement prepararConsulta(Connection con, String sqlBase, String textoBusqueda, String tipoFiltro, Map<String, String> filtrosAdicionales) throws SQLException {
         StringBuilder consulta = new StringBuilder(sqlBase);
         List<Object> parametros = new ArrayList<>();
 
@@ -123,25 +122,25 @@ public class Buscarmodel {
         }
 
         // Filtro por tipo de documento
-        if (tipoFiltro != null && !tipoFiltro.isEmpty()) {
+        if (tipoFiltro != null && !tipoFiltro.isEmpty() && !tipoFiltro.equalsIgnoreCase("Todos")) {
             consulta.append((parametros.isEmpty() ? " WHERE" : " AND") + " tipo = ?");
             parametros.add(tipoFiltro);
         }
 
-        // Filtros adicionales (Carrera o Cédula)
-        if (filtroAdicional != null && !filtroAdicional.isEmpty()) {
-            String tablaAdicional = tipoFiltro.equalsIgnoreCase("Trabajos de Grado") ? "tesis" : "informepasantia";
-            consulta.append(" AND id_documento IN (SELECT id_documento FROM " + tablaAdicional + " WHERE " + filtroAdicional + " = ?)");
-            parametros.add(valorAdicional);
+        // Filtros adicionales basados en el mapa recibido
+        if (filtrosAdicionales != null && !filtrosAdicionales.isEmpty()) {
+            for (Map.Entry<String, String> entry : filtrosAdicionales.entrySet()) {
+                String filtroNombre = entry.getKey();
+                String valor = entry.getValue();
+
+                if (valor != null && !valor.isEmpty()) {
+                    consulta.append((parametros.isEmpty() ? " WHERE" : " AND") + " " + filtroNombre + " = ?");
+                    parametros.add(valor);
+                }
+            }
         }
 
-        // Filtro específico para cédula
-        if ("cedula".equalsIgnoreCase(filtroAdicional) && valorAdicional != null && !valorAdicional.isEmpty()) {
-            String tablaCedula = tipoFiltro.equalsIgnoreCase("Trabajos de Grado") ? "tesis" : "informepasantia";
-            consulta.append(" AND id_documento IN (SELECT id_documento FROM " + tablaCedula + " WHERE cedula = ?)");
-            parametros.add(valorAdicional);
-        }
-
+        // Preparar la consulta
         PreparedStatement pst = con.prepareStatement(consulta.toString());
         for (int i = 0; i < parametros.size(); i++) {
             pst.setObject(i + 1, parametros.get(i));

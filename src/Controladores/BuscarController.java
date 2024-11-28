@@ -73,6 +73,9 @@ public class BuscarController implements Initializable {
     private TextField searchField;          // Campo de texto para búsqueda
     private HBox filtrosAdicionales;
     public List<Documento> resultados;
+    private JFXComboBox<String> authorFilter;
+    private JFXComboBox<String> editorFilter;
+    private JFXComboBox<String> careerFilter;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -231,7 +234,7 @@ public class BuscarController implements Initializable {
             yearFilter.setPromptText("Año");
 
             // Filtro de Carrera
-            JFXComboBox<String> careerFilter = new JFXComboBox<>();
+            careerFilter = new JFXComboBox<>();
             careerFilter.getItems().addAll("Arquitectura", "Ing. Civil", "Ing. Eléctrica", "Ing. Electrónica", "Ing. Industrial",
                     "Ing. en Mtto. Mecánico", "Ing. de Sistemas", "Ing. en Diseño Industrial", "Ing. Química", "Ing. de Petróleo");
             careerFilter.setStyle("-fx-border-color: #FA731F; "
@@ -249,7 +252,7 @@ public class BuscarController implements Initializable {
 
         } else if (tipo.equals("Libros")) {
             // Filtro de Autor
-            JFXComboBox<String> authorFilter = new JFXComboBox<>();
+            authorFilter = new JFXComboBox<>();
             authorFilter.setStyle("-fx-border-color: #FA731F; "
                     + "-fx-background-color: white; "
                     + "-fx-border-radius: 20; "
@@ -264,7 +267,7 @@ public class BuscarController implements Initializable {
             authorFilter.setItems(filtroscb.obtenerAutores()); // Aquí no hay error, es correcto
 
             // Filtro de Editorial
-            JFXComboBox<String> editorFilter = new JFXComboBox<>();
+            editorFilter = new JFXComboBox<>();
             editorFilter.setStyle("-fx-border-color: #FA731F; "
                     + "-fx-background-color: white; "
                     + "-fx-border-radius: 20; "
@@ -283,51 +286,90 @@ public class BuscarController implements Initializable {
     }
 
     private void realizarBusqueda() {
-        String tipoSeleccionado = pricingType.getValue(); // Obtener el tipo de documento seleccionado
-        String textoBusqueda = searchField.getText().trim(); // Texto ingresado en el TextField
+        // Texto introducido en la barra de búsqueda
+        String textoBusqueda = searchField.getText();
 
-        // Inicializar variables para filtros adicionales
-        String filtroAdicional = null;
-        String valorAdicional = null;
+        // Tipo de documento seleccionado
+        String tipoSeleccionado = pricingType.getValue();
 
-        // Obtener filtros adicionales según el tipo seleccionado
-        if (tipoSeleccionado.equals("Trabajos de Grado") || tipoSeleccionado.equals("Informes de Pasantia")) {
-            for (Node nodo : filtrosAdicionales.getChildren()) {
-                if (nodo instanceof JFXComboBox<?>) {
-                    JFXComboBox<?> comboBox = (JFXComboBox<?>) nodo;
+        // Recoger los filtros dinámicos
+        List<Node> filtrosActuales = filtrosAdicionales.getChildren(); // Obtiene los nodos actuales en el contenedor de filtros
 
-                    // Suponiendo que hay un filtro para carrera
-                    if (comboBox.getId() != null && comboBox.getId().equals("carreraFilter")) {
-                        filtroAdicional = "carrera"; // Clave para el filtro en la consulta
-                        valorAdicional = comboBox.getValue() != null ? comboBox.getValue().toString() : null;
-                    }
-                    // Otro filtro específico como año o cédula
-                    if (comboBox.getId() != null && comboBox.getId().equals("cedulaFilter")) {
-                        filtroAdicional = "cedula";
-                        valorAdicional = comboBox.getValue() != null ? comboBox.getValue().toString() : null;
-                    }
+        // Variables para almacenar los valores de los filtros
+        String filtroAño = null;
+        String filtroCarrera = null;
+        String filtroAutor = null;
+        String filtroEditorial = null;
+
+        // Iterar sobre los nodos de los filtros dinámicos
+        for (Node nodo : filtrosActuales) {
+            if (nodo instanceof JFXComboBox) {
+                JFXComboBox<?> comboBox = (JFXComboBox<?>) nodo;
+
+                // Identificar el filtro según su texto de indicación (prompt text)
+                switch (comboBox.getPromptText()) {
+                    case "Año":
+                        filtroAño = comboBox.getValue() != null ? comboBox.getValue().toString() : null;
+                        break;
+                    case "Carrera":
+                        filtroCarrera = comboBox.getValue() != null ? comboBox.getValue().toString() : null;
+                        break;
+                    case "Autor":
+                        filtroAutor = comboBox.getValue() != null ? comboBox.getValue().toString() : null;
+                        break;
+                    case "Editorial":
+                        filtroEditorial = comboBox.getValue() != null ? comboBox.getValue().toString() : null;
+                        break;
                 }
             }
         }
 
-        // Llamar al modelo con filtros
-        resultados = busquedamdl.buscarDocumentos(
-                textoBusqueda,
-                tipoSeleccionado.equals("Todos") ? null : tipoSeleccionado,
-                filtroAdicional,
-                valorAdicional
-        );
+        // Imprimir los valores de los filtros en consola (opcional, para depuración)
+        System.out.println("Texto de búsqueda: " + textoBusqueda);
+        System.out.println("Tipo seleccionado: " + tipoSeleccionado);
+        System.out.println("Filtro Año: " + filtroAño);
+        System.out.println("Filtro Carrera: " + filtroCarrera);
+        System.out.println("Filtro Autor: " + filtroAutor);
+        System.out.println("Filtro Editorial: " + filtroEditorial);
 
-        // Actualizar la interfaz gráfica con los resultados
+        // Crear un mapa de filtros para pasarlos al modelo
+        Map<String, String> filtros = new HashMap<>();
+        if (filtroAño != null) {
+            filtros.put("Año", filtroAño);
+        }
+        if (filtroCarrera != null) {
+            filtros.put("Carrera", filtroCarrera);
+        }
+        if (filtroAutor != null) {
+            filtros.put("Autor", filtroAutor);
+        }
+        if (filtroEditorial != null) {
+            filtros.put("Editorial", filtroEditorial);
+        }
+
+        // Llamar al modelo para realizar la búsqueda
+        List<Documento> resultados = busquedamdl.buscarDocumentos(textoBusqueda, tipoSeleccionado, filtros);
+
+        // Actualizar la vista con los resultados obtenidos
         actualizarResultadosEnUI(resultados);
     }
 
-    public void actualizarResultadosEnUI(List<Documento> docus) {
+    private void cargarAutores() {
+        ObservableList<String> autores = busquedamdl.obtenerAutores(); // Obtener lista de autores del modelo
+        authorFilter.setItems(autores); // Configurar los valores en el ComboBox
+    }
+
+    private void cargarEditoriales() {
+        ObservableList<String> editoriales = busquedamdl.obtenerEditoriales(); // Obtener lista de editoriales del modelo
+        editorFilter.setItems(editoriales); // Configurar los valores en el ComboBox
+    }
+
+     public void actualizarResultadosEnUI(List<Documento> docus) {
 
         docus.stream().forEach(d -> d.getdatos());
         itemholder.getChildren().clear(); // Limpiar VBox antes de agregar nuevos resultados
 
-        for (Documento documento : resultados) {
+        for (Documento documento : docus) {
             try {
                 // Cargar nodo FXML
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/documento.fxml"));
@@ -356,7 +398,4 @@ public class BuscarController implements Initializable {
             }
         }
     }
-
-
-
 }
