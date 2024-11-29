@@ -35,8 +35,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -44,6 +47,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import javafx.util.converter.NumberStringConverter;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -153,8 +158,8 @@ public class RegistrarController implements Initializable {
 
     @FXML
     private JFXButton btnbuscararchivo2;
-    
-      @FXML
+
+    @FXML
     private JFXTextField texttitulo3;
 
     @FXML
@@ -207,6 +212,113 @@ public class RegistrarController implements Initializable {
 
     public void setviewpane(AnchorPane viewpane) {
         this.viewp = viewpane;
+    }
+
+    private void limitarnumerosycomasbolas(JFXTextField a) {
+
+        StringConverter<Number> converter = new NumberStringConverter();
+        TextFormatter<Number> textFormatter = new TextFormatter<>(converter, 0, change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("-?\\d*(\\,\\d*)?")) {
+                return change;
+            }
+            return null;
+        });
+
+        a.setTextFormatter(textFormatter);
+    }
+
+    @FXML
+    private void limitarCaracteres100(KeyEvent event) {
+        // Identifica el TextField que activó el evento
+        JFXTextField textField = (JFXTextField) event.getSource();
+        textField.addEventHandler(KeyEvent.KEY_TYPED, evt -> {
+            evt.consume();
+        });
+        // Verifica y bloquea si excede el límite de caracteres
+        if (textField.getText().length() >= 100) {
+            event.consume(); // Bloquea el ingreso de más caracteres
+        }
+    }
+
+    @FXML
+    private void limitarCaracteres20(KeyEvent event) {
+        // Identifica el TextField que activó el evento
+        JFXTextField textField = (JFXTextField) event.getSource();
+
+        // Verifica y bloquea si excede el límite de caracteres
+        if (textField.getText().length() >= 20) {
+            event.consume(); // Bloquea el ingreso de más caracteres
+        }
+    }
+
+    @FXML
+    private void limitarCaracteres50(KeyEvent event) {
+        // Identifica el TextField que activó el evento
+        JFXTextField textField = (JFXTextField) event.getSource();
+
+        // Verifica y bloquea si excede el límite de caracteres
+        if (textField.getText().length() >= 50) {
+            event.consume(); // Bloquea el ingreso de más caracteres
+        }
+    }
+
+    @FXML
+    private void limitarCaracteres25(KeyEvent event) {
+        // Identifica el TextField que activó el evento
+        JFXTextField textField = (JFXTextField) event.getSource();
+
+        // Verifica y bloquea si excede el límite de caracteres
+        if (textField.getText().length() >= 25) {
+            event.consume(); // Bloquea el ingreso de más caracteres
+        }
+    }
+
+    @FXML
+    private void testMethod(KeyEvent event) {
+        System.out.println("Tecla presionada: " + event.getCharacter());
+    }
+
+    @FXML
+    private void limitarNumerosYComas(KeyEvent event) {
+        // Obtén el TextField que activó el evento
+        // Obtén el TextField que activó el evento
+        TextField textField = (TextField) event.getSource();
+
+        // Obtén el carácter recién ingresado
+        String newChar = event.getCharacter();
+
+        // Imprime información para depurar
+        System.out.println("Carácter ingresado: " + newChar);
+        System.out.println("Texto actual en el TextField: " + textField.getText());
+
+        // Verifica si el nuevo carácter es un número o una coma
+        if (!newChar.matches("[0-9,]")) {
+            System.out.println("Caracter no permitido");
+
+            event.consume(); // Bloquea la entrada no válida
+            return;
+        }
+
+        // Verifica si la longitud total del texto excede el máximo
+        if (textField.getText().length() >= 40) {
+            System.out.println("Límite de caracteres alcanzado");
+            event.consume(); // Bloquea la entrada si se excede el límite de caracteres
+        }
+    }
+
+    @FXML
+    private void limitarNumerosYComasYpuntos(KeyEvent event) {
+        // Obtén el TextField que activó el evento
+        JFXTextField textField = (JFXTextField) event.getSource();
+
+        // Obtén el carácter recién ingresado
+        String newChar = event.getCharacter();
+
+        // Permite solo números, coma y respeta el límite de caracteres
+        if (!newChar.matches("[0-9,.-]") || textField.getText().length() >= 10) {
+            event.consume(); // Bloquea la entrada no válida
+        }
     }
 
     @FXML
@@ -376,7 +488,7 @@ public class RegistrarController implements Initializable {
 
     @FXML
     private void onRegistrarinformeButtonClick(MouseEvent e) {
-        
+
         registmodel model = new registmodel(texttitulo2, textautor2, textcedula2, textempresa, cbcarrera2, cbdocumento, fecha2, pdfindice, resumenpdf, pdfportada, selectedFile);
         boolean registrado = model.registrarDocumentoYInformePasantia();
 
@@ -392,10 +504,10 @@ public class RegistrarController implements Initializable {
             mostrarMensaje("Error", "Hubo un problema al registrar los datos.");
         }
     }
-    
+
     @FXML
     private void onRegistrarlibroButtonClick(MouseEvent e) {
-        
+
         registmodel model = new registmodel(texttitulo3, textautor3, texteditorial, textedicion, textestante, textlomo, cbdocumento, fecha3, selectedFile, pdfindice, resumenpdf, pdfportada);
         boolean registrado = model.registrarDocumentoYLibro();
 
@@ -534,7 +646,8 @@ public class RegistrarController implements Initializable {
         cbdocumento.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             cambiarPane(newValue);
         });
-
+        
+        limitarnumerosycomasbolas(textcedula);
         //registrarmodel.configurarDatePicker(fecha);
     }
 

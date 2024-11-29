@@ -27,17 +27,22 @@ import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -369,12 +374,35 @@ public class registmodel {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Aviso");
             alert.setHeaderText(null);
-            alert.setContentText("Hay archivos vacíos. ¿Seguro que desea proceder?\nPuede modificar la entrada más tarde para agregar los archivos que faltan.");
+            alert.setContentText("Hay archivos vacíos. ¿Seguro que desea proceder?");
 
             // Agregar los botones Sí y No al Alert
             ButtonType buttonSi = new ButtonType("Sí");
             ButtonType buttonNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
             alert.getButtonTypes().setAll(buttonSi, buttonNo);
+            // Personalizar los botones de la alerta con CSS en línea
+            // Personalizar los botones individualmente
+            // Agregar los botones al contenedor
+            Button btnSi = (Button) alert.getDialogPane().lookupButton(buttonSi);
+            btnSi.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 20;");
+
+            Button btnNo = (Button) alert.getDialogPane().lookupButton(buttonNo);
+            btnNo.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 10 20;");
+
+            HBox customButtonBar = new HBox(10); // Espaciado de 10 entre botones
+            customButtonBar.setStyle("-fx-alignment: center; -fx-padding: 10;");
+
+            // Agregar los botones al contenedor
+            customButtonBar.getChildren().addAll(btnSi, btnNo);
+
+            // Reemplazar el contenido predeterminado del DialogPane con el contenedor personalizado
+            alert.getDialogPane().setContentText(null); // Elimina el texto predeterminado para añadirlo manualmente
+            alert.getDialogPane().setContent(new VBox(
+                    new Label("Hay archivos vacíos. ¿Seguro que desea proceder?"),
+                    customButtonBar
+            ));
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE); // A// Ajustar el tamaño mínimo
 
             // Mostrar el diálogo y capturar la respuesta del usuario
             Optional<ButtonType> result = alert.showAndWait();

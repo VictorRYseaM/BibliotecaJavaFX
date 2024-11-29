@@ -55,7 +55,7 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="texttitulo" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="texttitulo" focusColor="#fa731f" onKeyTyped="#limitarCaracteres100" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Autor(es)" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -64,8 +64,8 @@
                                     <Insets top="25.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textautor" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
-                              <Label prefHeight="28.0" prefWidth="318.0" text="Cedula autor(es)" textFill="WHITE">
+                              <JFXTextField fx:id="textautor" focusColor="#fa731f" onKeyPressed="#limitarCaracteres100" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <Label onKeyPressed="#limitarNumerosYComas" prefHeight="28.0" prefWidth="318.0" text="Cedula autor(es)" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -73,7 +73,7 @@
                                     <Insets top="25.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textcedula" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="textcedula" focusColor="#fa731f" onInputMethodTextChanged="#limitarNumerosYComas" onKeyPressed="#limitarNumerosYComas" onKeyReleased="#limitarNumerosYComas" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Codigo de Tesis" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -82,7 +82,7 @@
                                     <Insets top="25.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="codtesis" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="codtesis" focusColor="#fa731f" onKeyPressed="#limitarCaracteres20" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Carrera" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -270,7 +270,7 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="texttitulo2" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="texttitulo2" focusColor="#fa731f" onKeyPressed="#limitarCaracteres100" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Autor(es)" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -279,7 +279,7 @@
                                     <Insets top="25.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textautor2" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="textautor2" focusColor="#fa731f" onKeyPressed="#limitarCaracteres100" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Cedula autor(es)" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -288,7 +288,7 @@
                                     <Insets top="25.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textcedula2" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="textcedula2" focusColor="#fa731f" onKeyPressed="#limitarNumerosYComas" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Empresa" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -297,7 +297,7 @@
                                     <Insets top="25.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textempresa" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="textempresa" focusColor="#fa731f" onKeyPressed="#limitarCaracteres50" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Carrera" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -482,7 +482,7 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="texttitulo3" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="texttitulo3" focusColor="#fa731f" onKeyPressed="#limitarCaracteres100" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Autor(es)" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -491,7 +491,7 @@
                                     <Insets top="15.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textautor3" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="textautor3" focusColor="#fa731f" onKeyPressed="#limitarCaracteres100" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Editorial" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -500,7 +500,7 @@
                                     <Insets top="15.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="texteditorial" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="texteditorial" focusColor="#fa731f" onKeyPressed="#limitarCaracteres50" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Edición" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -509,7 +509,7 @@
                                     <Insets top="15.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textedicion" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="textedicion" focusColor="#fa731f" onKeyPressed="#limitarCaracteres20" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Estante" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -518,7 +518,7 @@
                                     <Insets top="15.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textestante" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="textestante" focusColor="#fa731f" onKeyPressed="#limitarNumerosYComasYpuntos" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                               <Label prefHeight="28.0" prefWidth="318.0" text="Codigo de Lomo" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
@@ -527,7 +527,7 @@
                                     <Insets top="15.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="textlomo" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                              <JFXTextField fx:id="textlomo" focusColor="#fa731f" onKeyPressed="#limitarCaracteres25" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                            </children>
                            <HBox.margin>
                               <Insets right="80.0" />
