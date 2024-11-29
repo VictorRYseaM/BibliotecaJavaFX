@@ -127,13 +127,40 @@ public class Buscarmodel {
             parametros.add(tipoFiltro);
         }
 
-        // Filtros adicionales basados en el mapa recibido
+        // Filtros adicionales
         if (filtrosAdicionales != null && !filtrosAdicionales.isEmpty()) {
             for (Map.Entry<String, String> entry : filtrosAdicionales.entrySet()) {
                 String filtroNombre = entry.getKey();
                 String valor = entry.getValue();
 
-                if (valor != null && !valor.isEmpty()) {
+                if (filtroNombre.equalsIgnoreCase("Carrera") && valor != null && !valor.isEmpty()) {
+                    if ("Trabajos de Grado".equalsIgnoreCase(tipoFiltro)) {
+                        consulta.append(" AND id_documento IN (");
+                        consulta.append("SELECT d.id_documento FROM documento d ");
+                        consulta.append("JOIN tesis t ON d.id_documento = t.id_documento WHERE t.Carrera = ?)");
+                        parametros.add(valor);
+                    } else if ("Informes de Pasantía".equalsIgnoreCase(tipoFiltro)) {
+                        consulta.append(" AND id_documento IN (");
+                        consulta.append("SELECT d.id_documento FROM documento d ");
+                        consulta.append("JOIN informepasantia i ON d.id_documento = i.id_documento WHERE i.Carrera = ?)");
+                        parametros.add(valor);
+                    }
+                } else if (filtroNombre.equalsIgnoreCase("Año") && valor != null && !valor.isEmpty()) {
+                    int anio = Integer.parseInt(valor);
+                    String fechaInicio = anio + "-01-01";
+                    String fechaFin = anio + "-12-31";
+
+                    consulta.append((parametros.isEmpty() ? " WHERE" : " AND") + " Fecha_publicacion BETWEEN ? AND ?");
+                    parametros.add(fechaInicio);
+                    parametros.add(fechaFin);
+                } else if (filtroNombre.equalsIgnoreCase("Editorial") && valor != null && !valor.isEmpty()) {
+                    if ("Libros".equalsIgnoreCase(tipoFiltro)) {
+                        consulta.append((parametros.isEmpty() ? " WHERE" : " AND") + " id_documento IN (");
+                        consulta.append("SELECT d.id_documento FROM documento d ");
+                        consulta.append("JOIN libro l ON d.id_documento = l.id_documento WHERE l.Editorial = ?)");
+                        parametros.add(valor);
+                    }
+                } else if (valor != null && !valor.isEmpty()) {
                     consulta.append((parametros.isEmpty() ? " WHERE" : " AND") + " " + filtroNombre + " = ?");
                     parametros.add(valor);
                 }

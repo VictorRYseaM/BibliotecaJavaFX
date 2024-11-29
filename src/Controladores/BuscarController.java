@@ -98,7 +98,7 @@ public class BuscarController implements Initializable {
 
                 // Cambiar color al pasar el mouse
                 nodes[i].setOnMouseEntered(event -> nodes[j].setStyle("-fx-background-color: #FA731F"));
-                nodes[i].setOnMouseExited(event -> nodes[j].setStyle("-fx-background-color: white"));
+                nodes[i].setOnMouseExited(event -> nodes[j].setStyle("-fx-background-color: #e0e0e0"));
 
                 // Agregar nodo al VBox
                 itemholder.getChildren().add(nodes[i]);
@@ -387,7 +387,7 @@ public class BuscarController implements Initializable {
                 
                 // Cambiar estilo al pasar el mouse
                 nodo.setOnMouseEntered(event -> nodo.setStyle("-fx-background-color: #FA731F"));
-                nodo.setOnMouseExited(event -> nodo.setStyle("-fx-background-color: white"));
+                nodo.setOnMouseExited(event -> nodo.setStyle("-fx-background-color: #e0e0e0"));
 
                 // Agregar nodo al VBox
                 itemholder.getChildren().add(nodo);
