@@ -4,6 +4,7 @@
  */
 package Modelos;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -27,12 +28,28 @@ public class InformePasantia extends Documento {
         return Cedula;
     }
 
-    public InformePasantia(String Empresa, String Carrera, String Cedula, int id_documento, String Titulo, String Tipo, String Autor, Date Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
+    public void setEmpresa(String Empresa) {
+        this.Empresa = Empresa;
+    }
+
+    public void setCarrera(String Carrera) {
+        this.Carrera = Carrera;
+    }
+
+    public void setCedula(String Cedula) {
+        this.Cedula = Cedula;
+    }
+    
+    
+
+    public InformePasantia(String Empresa, String Carrera, String Cedula, int id_documento, String Titulo, String Tipo, String Autor, LocalDate Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
         super(id_documento, Titulo, Tipo, Autor, Fecha_publicacion, Resumen, Indice, Img_portada, Archivopdf);
         this.Empresa = Empresa;
         this.Carrera = Carrera;
         this.Cedula = Cedula;
     }
+    
+    public InformePasantia(){}
     
     
 }

@@ -4,6 +4,7 @@
  */
 package Modelos;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -15,12 +16,14 @@ public class TrabajoGrado extends Documento {
     private String Codigo;
     private String Cedula;
 
-    public TrabajoGrado(String Carrera, String Codigo, String Cedula, int id_documento, String Titulo, String Tipo, String Autor, Date Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
+    public TrabajoGrado(String Carrera, String Codigo, String Cedula, int id_documento, String Titulo, String Tipo, String Autor, LocalDate Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
         super(id_documento, Titulo, Tipo, Autor, Fecha_publicacion, Resumen, Indice, Img_portada, Archivopdf);
         this.Carrera = Carrera;
         this.Codigo = Codigo;
         this.Cedula = Cedula;
     }
+    
+    public TrabajoGrado(){}
 
     /**
      * @return the Carrera

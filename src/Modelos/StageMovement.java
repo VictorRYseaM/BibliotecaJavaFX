@@ -4,6 +4,7 @@
  */
 package Modelos;
 
+import Controladores.BuscarController;
 import Controladores.InicioController;
 import Controladores.LoginController;
 import animatefx.animation.FadeIn;
@@ -38,17 +39,39 @@ public class StageMovement {
         Parent root = null;
         String pag = "/Vistas/";
         pag += page;
-        
+
         try {
             root = FXMLLoader.load(getClass().getResource(pag + ".fxml"));
         } catch (IOException ex) {
             Logger.getLogger(InicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         viewpane.getChildren().clear();
         viewpane.getChildren().add(root);
         new FadeIn(root).play();
-        
+
+    }
+
+    public void loadpagevolverabuscar(String page, AnchorPane viewpane) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            BuscarController ac = load.getController();
+            ac.setviewpane(viewpane);
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
     }
 
     @FXML

@@ -4,6 +4,7 @@
  */
 package Modelos;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -32,11 +33,30 @@ public class Libro extends Documento{
     private String Estante;
     private String Cod_lomo;
 
-    public Libro(String Editorial, String Edicion, String Estante, String Cod_lomo, int id_documento, String Titulo, String Tipo, String Autor, Date Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
+    public Libro(String Editorial, String Edicion, String Estante, String Cod_lomo, int id_documento, String Titulo, String Tipo, String Autor, LocalDate Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
         super(id_documento, Titulo, Tipo, Autor, Fecha_publicacion, Resumen, Indice, Img_portada, Archivopdf);
         this.Editorial = Editorial;
         this.Edicion = Edicion;
         this.Estante = Estante;
+        this.Cod_lomo = Cod_lomo;
+    }
+    
+    public Libro(){
+    }
+
+    public void setEditorial(String Editorial) {
+        this.Editorial = Editorial;
+    }
+
+    public void setEdicion(String Edicion) {
+        this.Edicion = Edicion;
+    }
+
+    public void setEstante(String Estante) {
+        this.Estante = Estante;
+    }
+
+    public void setCod_lomo(String Cod_lomo) {
         this.Cod_lomo = Cod_lomo;
     }
     

@@ -4,19 +4,31 @@
  */
 package Modelos;
 
+import Controladores.BuscarController;
+import Controladores.InicioController;
+import Controladores.RegistrarController;
+import Controladores.VistaInformeController;
+import Controladores.VistaLibroController;
+import Controladores.VistaTesisController;
+import animatefx.animation.FadeIn;
+import com.sun.javafx.logging.PlatformLogger.Level;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.System.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javax.imageio.ImageIO;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -92,7 +104,7 @@ public class Buscarmodel {
 
     public List<Documento> buscarDocumentos(String textoBusqueda, String tipoFiltro, Map<String, String> filtrosAdicionales) {
         List<Documento> resultados = new ArrayList<>();
-        String sqlBase = "SELECT id_documento, titulo, autor, img_portada FROM documento";
+        String sqlBase = "SELECT id_documento, titulo, autor, img_portada, tipo FROM documento";
 
         try (java.sql.Connection con = new Conexion().conectar(); PreparedStatement pst = prepararConsulta(con, sqlBase, textoBusqueda, tipoFiltro, filtrosAdicionales); ResultSet rs = pst.executeQuery()) {
 
@@ -102,6 +114,7 @@ public class Buscarmodel {
                 doc.setTitulo(rs.getString("titulo"));
                 doc.setAutor(rs.getString("autor"));
                 doc.setImg_portada(rs.getBytes("img_portada"));
+                doc.setTipo(rs.getString("tipo"));
                 resultados.add(doc);
             }
         } catch (SQLException e) {
@@ -197,6 +210,228 @@ public class Buscarmodel {
             fos.write(pdfData);
         }
         return tempFile;
+    }
+
+    public void loadpage(String page, AnchorPane viewpane) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            BuscarController ac = load.getController();
+            ac.setviewpane(viewpane);
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+
+    public void loadpagelibro(String page, AnchorPane viewpane, int id_doc) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            VistaLibroController ac = load.getController();
+            ac.setviewpane(viewpane);
+            ac.setlibro(obtenerLibroPorId(id_doc));
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+
+    public void loadpageinforme(String page, AnchorPane viewpane, int id_doc) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            VistaInformeController ac = load.getController();
+
+            ac.setviewpane(viewpane);
+            ac.setInforme(obtenerInformePasantiaPorId(id_doc));
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+
+    public void loadpagetesis(String page, AnchorPane viewpane, int id_doc) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            VistaTesisController ac = load.getController();
+            ac.setviewpane(viewpane);
+            ac.setTesis(obtenerTesisPorId(id_doc));
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+
+    public Libro obtenerLibroPorId(int idDocumento) {
+        Libro libro = null;
+
+        String query = "SELECT d.titulo, d.tipo, d.autor, d.fecha_publicacion, d.resumen, "
+                + "d.indice, d.img_portada, d.archivopdf, "
+                + "l.editorial, l.edicion, l.estante, l.cod_lomo "
+                + "FROM documento d "
+                + "INNER JOIN libro l ON d.id_documento = l.id_documento "
+                + "WHERE d.id_documento = ?";
+
+        try (Connection conn = new Conexion().conectar(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, idDocumento);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Crear un objeto Libro con los datos obtenidos
+                    libro = new Libro();
+
+                    // Datos de la tabla `documento`
+                    libro.setId_documento(idDocumento);
+                    libro.setTitulo(rs.getString("titulo"));
+                    libro.setTipo(rs.getString("tipo"));
+                    libro.setAutor(rs.getString("autor"));
+                    libro.setFecha_publicacion(rs.getDate("fecha_publicacion").toLocalDate());
+                    libro.setResumen(rs.getBytes("resumen"));
+                    libro.setIndice(rs.getBytes("indice"));
+                    libro.setImg_portada(rs.getBytes("img_portada"));
+                    libro.setArchivopdf(rs.getBytes("archivopdf"));
+
+                    // Datos de la tabla `libro`
+                    libro.setEditorial(rs.getString("editorial"));
+                    libro.setEdicion(rs.getString("edicion"));
+                    libro.setEstante(rs.getString("estante"));
+                    libro.setCod_lomo(rs.getString("cod_lomo"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return libro;
+    }
+
+    public TrabajoGrado obtenerTesisPorId(int idDocumento) {
+        TrabajoGrado tesis = null;
+
+        String query = "SELECT d.titulo, d.tipo, d.autor, d.fecha_publicacion, d.resumen, "
+                + "d.indice, d.img_portada, d.archivopdf, "
+                + "t.carrera, t.codigo, t.cedula "
+                + "FROM documento d "
+                + "INNER JOIN tesis t ON d.id_documento = t.id_documento "
+                + "WHERE d.id_documento = ?";
+
+        try (Connection conn = new Conexion().conectar(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, idDocumento);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Crear un objeto Tesis con los datos obtenidos
+                    tesis = new TrabajoGrado();
+
+                    // Datos de la tabla `documento`
+                    tesis.setId_documento(idDocumento);
+                    tesis.setTitulo(rs.getString("titulo"));
+                    tesis.setTipo(rs.getString("tipo"));
+                    tesis.setAutor(rs.getString("autor"));
+                    tesis.setFecha_publicacion(rs.getDate("fecha_publicacion").toLocalDate());
+                    tesis.setResumen(rs.getBytes("resumen"));
+                    tesis.setIndice(rs.getBytes("indice"));
+                    tesis.setImg_portada(rs.getBytes("img_portada"));
+                    tesis.setArchivopdf(rs.getBytes("archivopdf"));
+
+                    // Datos de la tabla `tesis`
+                    tesis.setCarrera(rs.getString("carrera"));
+                    tesis.setCodigo(rs.getString("codigo"));
+                    tesis.setCedula(rs.getString("cedula"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tesis;
+    }
+
+    public InformePasantia obtenerInformePasantiaPorId(int idDocumento) {
+        InformePasantia informePasantia = null;
+
+        String query = "SELECT d.titulo, d.tipo, d.autor, d.fecha_publicacion, d.resumen, "
+                + "d.indice, d.img_portada, d.archivopdf, "
+                + "i.empresa, i.carrera, i.cedula "
+                + "FROM documento d "
+                + "INNER JOIN informepasantia i ON d.id_documento = i.id_documento "
+                + "WHERE d.id_documento = ?";
+
+        try (Connection conn = new Conexion().conectar(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, idDocumento);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Crear un objeto InformePasantia con los datos obtenidos
+                    informePasantia = new InformePasantia();
+
+                    // Datos de la tabla `documento`
+                    informePasantia.setId_documento(idDocumento);
+                    informePasantia.setTitulo(rs.getString("titulo"));
+                    informePasantia.setTipo(rs.getString("tipo"));
+                    informePasantia.setAutor(rs.getString("autor"));
+                    informePasantia.setFecha_publicacion(rs.getDate("fecha_publicacion").toLocalDate());
+                    informePasantia.setResumen(rs.getBytes("resumen"));
+                    informePasantia.setIndice(rs.getBytes("indice"));
+                    informePasantia.setImg_portada(rs.getBytes("img_portada"));
+                    informePasantia.setArchivopdf(rs.getBytes("archivopdf"));
+
+                    // Datos de la tabla `informepasantia`
+                    informePasantia.setEmpresa(rs.getString("empresa"));
+                    informePasantia.setCarrera(rs.getString("carrera"));
+                    informePasantia.setCedula(rs.getString("cedula"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return informePasantia;
     }
 
 }

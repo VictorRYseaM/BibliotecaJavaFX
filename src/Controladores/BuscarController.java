@@ -63,6 +63,7 @@ public class BuscarController implements Initializable {
     private AnchorPane panetoolbar;
     @FXML
     private ScrollPane scroll;
+    private AnchorPane viewp;
 
     private HBox toolbarContent;
     private Buscarmodel filtroscb = new Buscarmodel();
@@ -108,6 +109,10 @@ public class BuscarController implements Initializable {
             }
 
         }
+    }
+
+    public void setviewpane(AnchorPane viewpane) {
+        this.viewp = viewpane;
     }
 
     private void crearBarraDeBusqueda() {
@@ -364,7 +369,7 @@ public class BuscarController implements Initializable {
         editorFilter.setItems(editoriales); // Configurar los valores en el ComboBox
     }
 
-     public void actualizarResultadosEnUI(List<Documento> docus) {
+    public void actualizarResultadosEnUI(List<Documento> docus) {
 
         docus.stream().forEach(d -> d.getdatos());
         itemholder.getChildren().clear(); // Limpiar VBox antes de agregar nuevos resultados
@@ -384,11 +389,17 @@ public class BuscarController implements Initializable {
 
                 // Configurar datos del nodo
                 controller.setData(documento.getTitulo(), imagenPortada);
-                
+
                 // Cambiar estilo al pasar el mouse
                 nodo.setOnMouseEntered(event -> nodo.setStyle("-fx-background-color: #FA731F"));
                 nodo.setOnMouseExited(event -> nodo.setStyle("-fx-background-color: #e0e0e0"));
 
+                // Evento de doble clic para cambiar de vista
+                nodo.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2) {
+                        abrirVistaDetalles(documento); // Método para manejar la transición
+                    }
+                });
                 // Agregar nodo al VBox
                 itemholder.getChildren().add(nodo);
                 pdfFile.delete();
@@ -396,6 +407,23 @@ public class BuscarController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void abrirVistaDetalles(Documento document) {
+        try {
+            
+            if(document.getTipo().equalsIgnoreCase("Libros")){
+                busquedamdl.loadpagelibro("visualizaciondellibro", viewp, document.getId_documento());
+            }else if(document.getTipo().equalsIgnoreCase("Trabajos de Grado")){
+                busquedamdl.loadpagetesis("visualizaciondetrabajodegrado", viewp, document.getId_documento());
+            }else if(document.getTipo().equalsIgnoreCase("Informes de Pasantia")){
+                busquedamdl.loadpageinforme("visualizaciondepasantias", viewp, document.getId_documento());
+            }
+           
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -4,24 +4,39 @@
  */
 package Modelos;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
+import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
+import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 
 /**
  *
  * @author VictorY
  */
 public class Documento {
+
     private int id_documento;
     private String Titulo;
     private String Tipo;
     private String Autor;
-    private Date Fecha_publicacion;
+    private LocalDate Fecha_publicacion;
     private byte[] Resumen;
     private byte[] Indice;
     private byte[] Img_portada;
     private byte[] Archivopdf;
 
-    public Documento(int id_documento, String Titulo, String Tipo, String Autor, Date Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
+    public Documento(int id_documento, String Titulo, String Tipo, String Autor, LocalDate Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
         this.id_documento = id_documento;
         this.Titulo = Titulo;
         this.Tipo = Tipo;
@@ -32,28 +47,27 @@ public class Documento {
         this.Img_portada = Img_portada;
         this.Archivopdf = Archivopdf;
     }
-    
-    public Documento(int id_documento, String Titulo, String Tipo, String Autor, byte[] Img_portada){
-        this.id_documento=id_documento;
-        this.Titulo=Titulo;
-        this.Tipo=Tipo;
-        this.Autor=Autor;
+
+    public Documento(int id_documento, String Titulo, String Tipo, String Autor, byte[] Img_portada) {
+        this.id_documento = id_documento;
+        this.Titulo = Titulo;
+        this.Tipo = Tipo;
+        this.Autor = Autor;
         this.Img_portada = Img_portada;
-        
+
     }
 
     public Documento() {
     }
-    
-    public void getdatos(){
-        System.out.println("\n"+id_documento);
+
+    public void getdatos() {
+        System.out.println("\n" + id_documento);
         System.out.println(Titulo);
         System.out.println(Tipo);
         System.out.println(Autor);
         System.out.println("---------------------");
     }
-    
-    
+
     /**
      * @return the id_documento
      */
@@ -113,14 +127,14 @@ public class Documento {
     /**
      * @return the Fecha_publicacion
      */
-    public Date getFecha_publicacion() {
+    public LocalDate getFecha_publicacion() {
         return Fecha_publicacion;
     }
 
     /**
      * @param Fecha_publicacion the Fecha_publicacion to set
      */
-    public void setFecha_publicacion(Date Fecha_publicacion) {
+    public void setFecha_publicacion(LocalDate Fecha_publicacion) {
         this.Fecha_publicacion = Fecha_publicacion;
     }
 
@@ -178,5 +192,67 @@ public class Documento {
      */
     public void setArchivopdf(byte[] Archivopdf) {
         this.Archivopdf = Archivopdf;
+    }
+
+    public static Image convertPdfBytesToImage(byte[] pdfData) throws IOException {
+        // Crear un archivo temporal con los datos del PDF
+        File tempFile = File.createTempFile("tempPdf", ".pdf");
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            fos.write(pdfData);
+        }
+
+        // Convertir el archivo PDF temporal en una imagen
+        try (PDDocument document = Loader.loadPDF(tempFile)) {
+            PDFRenderer renderer = new PDFRenderer(document);
+
+            // Renderizar la primera página como imagen
+            BufferedImage bufferedImage = renderer.renderImageWithDPI(0, 72); // 150 DPI para calidad moderada
+
+            // Convertir BufferedImage a InputStream para JavaFX Image
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", outputStream);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+            // Devolver la imagen
+            return new Image(inputStream);
+        } finally {
+            // Eliminar el archivo temporal para liberar espacio
+            tempFile.delete();
+        }
+    }
+
+ 
+
+    public static Image convertPdfBytesToImageInformesyTesis(byte[] pdfBytes) throws IOException {
+        // Crear un archivo temporal para cargar el PDF
+        File tempFile = File.createTempFile("tempPdf", ".pdf");
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            fos.write(pdfBytes);
+        }
+
+        try (PDDocument document = Loader.loadPDF(tempFile)) {
+            PDFRenderer renderer = new PDFRenderer(document);
+
+            // Renderizar la primera página con un DPI mayor para mayor calidad
+            float dpi = 300; // Mayor DPI = Mayor resolución
+            BufferedImage bufferedImage = renderer.renderImageWithDPI(0, dpi);
+
+            // Recortar o ampliar la imagen para simular un zoom
+            int targetWidth = 1000; // Ajusta según necesites
+            int targetHeight = 1200; // Ajusta según necesites
+            BufferedImage zoomedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
+
+            // Dibujar la imagen escalada al nuevo tamaño
+            Graphics2D g2d = zoomedImage.createGraphics();
+            g2d.drawImage(bufferedImage, 0, 0, targetWidth, targetHeight, null);
+            g2d.dispose();
+
+            // Convertir BufferedImage a InputStream para JavaFX Image
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(zoomedImage, "png", outputStream);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+            return new Image(inputStream);
+        }
     }
 }
