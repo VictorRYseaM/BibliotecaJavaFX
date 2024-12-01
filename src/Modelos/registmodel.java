@@ -39,6 +39,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -46,6 +47,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
+import javax.imageio.ImageIO;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -113,7 +115,7 @@ public class registmodel {
         }
     }
 
-    // Constructor para establecer los valores de los campos
+    // Constructor para establecer los valores de los campos - Informes de pasantia
 // Constructor para establecer los valores de los campos (usando los atributos existentes)
     public registmodel(TextField texttitulo2, TextField textautor2, TextField textcedula2, TextField textempresa,
             ComboBox<String> cbcarrera2, ComboBox<String> cbdocumento, DatePicker fecha2,
@@ -597,6 +599,207 @@ public class registmodel {
 
         // Cerrar el documento después de usarlo
         documento.close();
+    }
+
+    public void cargarPaginasComoImagenesParaVistas(File archivoPdf, int paginaInicio, int paginaFin, VBox contenedor) throws IOException {
+        try (PDDocument documento = Loader.loadPDF(archivoPdf)) {
+            PDFRenderer renderizador = new PDFRenderer(documento);
+
+            for (int i = paginaInicio - 1; i < paginaFin; i++) {
+                // Renderizar la página como BufferedImage
+                BufferedImage imagenPagina = renderizador.renderImageWithDPI(i, 150); // 150 DPI para buena calidad
+
+                // Guardar la imagen temporalmente
+                File imagenTemporal = File.createTempFile("pagina_" + (i + 1), ".png");
+                ImageIO.write(imagenPagina, "PNG", imagenTemporal);
+
+                // Crear un ImageView para la imagen y añadirlo al VBox
+                Image imagenJavaFX = new Image(imagenTemporal.toURI().toString());
+                ImageView vistaImagen = new ImageView(imagenJavaFX);
+                vistaImagen.setFitWidth(800); // Ajustar ancho
+                vistaImagen.setPreserveRatio(true); // Mantener proporción
+
+                contenedor.getChildren().add(vistaImagen);
+
+                // Eliminar la imagen temporal después de agregarla al VBox
+                imagenTemporal.deleteOnExit();
+            }
+        }
+    }
+
+    public boolean modificarDocumentoYLibro(int idDocumento) {
+        if (camposValidos3()) {
+            // Sentencias SQL para actualizar las tablas
+            String sqlDocumento = "UPDATE documento SET Titulo = ?, Tipo = ?, Autor = ?, Fecha_publicacion = ?, Resumen = ?, Indice = ?, Img_portada = ?, Archivopdf = ? WHERE id_documento = ?";
+            String sqlLibro = "UPDATE libro SET Editorial = ?, Edicion = ?, Estante = ?, Cod_Lomo = ? WHERE id_documento = ?";
+
+            try (java.sql.Connection con = new Conexion().conectar()) {
+                // Actualizar la tabla documento
+                PreparedStatement pstDocumento = con.prepareStatement(sqlDocumento);
+                pstDocumento.setString(1, texttitulo.getText());   // Titulo
+                pstDocumento.setString(2, cbdocumento.getValue()); // Tipo (extraído de ComboBox)
+                pstDocumento.setString(3, textautor.getText());    // Autor
+                pstDocumento.setDate(4, java.sql.Date.valueOf(fecha.getValue())); // Fecha_publicacion
+                pstDocumento.setBytes(5, resumenpdf);              // Resumen (archivo PDF)
+                pstDocumento.setBytes(6, pdfindice);               // Indice (archivo PDF)
+                pstDocumento.setBytes(7, pdfportada);              // Img_portada (archivo PDF)
+                pstDocumento.setBytes(8, archivopdf);              // Archivopdf (archivo PDF)
+                pstDocumento.setInt(9, idDocumento);               // id_documento (clave primaria)
+
+                int filasAfectadasDocumento = pstDocumento.executeUpdate();
+
+                if (filasAfectadasDocumento > 0) {
+                    // Actualizar la tabla libro
+                    PreparedStatement pstLibro = con.prepareStatement(sqlLibro);
+                    pstLibro.setString(1, texteditorial.getText());  // Editorial
+                    pstLibro.setString(2, textedicion.getText());    // Edición
+                    pstLibro.setString(3, textestante.getText());    // Estante
+                    pstLibro.setString(4, textlomo.getText());       // Cod_Lomo
+                    pstLibro.setInt(5, idDocumento);                 // id_documento (relacionado)
+
+                    int filasAfectadasLibro = pstLibro.executeUpdate();
+
+                    if (filasAfectadasLibro > 0) {
+                        limpiarFormulariolibro(); // Limpia los campos
+                        texttitulo.requestFocus(); // Hace foco en el campo de título
+                        return true;
+                    }
+                }
+                return false;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            mostrarAlerta("Error", "Por favor, complete todos los campos.");
+            return false;
+        }
+    }
+
+    // Método para modificar el documento y la tesis
+    public boolean modificarDocumentoYtesis(int idDocumento) {
+        if (camposValidos()) {
+            String sqlDocumento = "UPDATE documento SET Titulo = ?, Tipo = ?, Autor = ?, Fecha_publicacion = ?, Resumen = ?, Indice = ?, Img_portada = ?, Archivopdf = ? WHERE id_documento = ?";
+
+            try (java.sql.Connection con = new Conexion().conectar()) {
+                PreparedStatement pst = con.prepareStatement(sqlDocumento);
+                pst.setString(1, texttitulo.getText());
+                pst.setString(2, cbdocumento.getValue());
+                pst.setString(3, textautor.getText());
+                pst.setDate(4, java.sql.Date.valueOf(fecha.getValue()));
+                pst.setBytes(5, resumenpdf);
+                pst.setBytes(6, pdfindice);
+                pst.setBytes(7, pdfportada);
+                pst.setBytes(8, archivopdf);
+                pst.setInt(9, idDocumento); // Agregar el ID del documento como filtro
+
+                int filasAfectadasDocumento = pst.executeUpdate();
+
+                if (filasAfectadasDocumento > 0) {
+                    String sqlTesis = "UPDATE tesis SET Carrera = ?, codigo = ?, Cedula = ? WHERE id_documento = ?";
+                    PreparedStatement pstTesis = con.prepareStatement(sqlTesis);
+                    pstTesis.setString(1, cbcarrera.getValue());
+                    pstTesis.setString(2, codtesis.getText());
+                    pstTesis.setString(3, textcedula.getText());
+                    pstTesis.setInt(4, idDocumento); // Agregar el ID del documento como filtro
+
+                    int filasAfectadasTesis = pstTesis.executeUpdate();
+
+                    if (filasAfectadasTesis > 0) {
+                        limpiarFormulario(); // Limpia los campos
+                        texttitulo.requestFocus(); // Hace foco en el campo de título
+                        return true;
+                    }
+                }
+                return false;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            mostrarAlerta("Error", "Por favor, complete todos los campos.");
+            return false;
+        }
+    }
+
+    public boolean modificarDocumentoYInformePasantia(int idDocumento) {
+        if (camposValidos2()) {
+            // Sentencia SQL para actualizar la tabla documento
+            String sqlDocumento = "UPDATE documento SET Titulo = ?, Tipo = ?, Autor = ?, Fecha_publicacion = ?, Resumen = ?, Indice = ?, Img_portada = ?, Archivopdf = ? WHERE id_documento = ?";
+
+            try (java.sql.Connection con = new Conexion().conectar()) {
+                // Preparar actualización en la tabla documento
+                PreparedStatement pst = con.prepareStatement(sqlDocumento);
+                pst.setString(1, texttitulo.getText());   // Titulo
+                pst.setString(2, cbdocumento.getValue()); // Tipo (extraído de ComboBox)
+                pst.setString(3, textautor.getText());    // Autor
+                pst.setDate(4, java.sql.Date.valueOf(fecha.getValue())); // Fecha_publicacion
+                pst.setBytes(5, resumenpdf);              // Resumen (archivo PDF)
+                pst.setBytes(6, pdfindice);               // Indice (archivo PDF)
+                pst.setBytes(7, pdfportada);              // Img_portada (archivo PDF)
+                pst.setBytes(8, archivopdf);              // Archivopdf (archivo PDF)
+                pst.setInt(9, idDocumento);               // id_documento (clave primaria)
+
+                // Ejecutar actualización en la tabla documento
+                int filasAfectadas = pst.executeUpdate();
+
+                if (filasAfectadas > 0) {
+                    // Sentencia SQL para actualizar la tabla informepasantia
+                    String sqlInformePasantia = "UPDATE informepasantia SET Empresa = ?, Carrera = ?, Cedula = ? WHERE id_documento = ?";
+                    PreparedStatement pstInforme = con.prepareStatement(sqlInformePasantia);
+                    pstInforme.setString(1, textempresa.getText());  // Empresa
+                    pstInforme.setString(2, cbcarrera.getValue());   // Carrera (extraído de ComboBox)
+                    pstInforme.setString(3, textcedula.getText());   // Cedula
+                    pstInforme.setInt(4, idDocumento);               // id_documento (relacionado)
+
+                    // Ejecutar actualización en la tabla informepasantia
+                    int filasAfectadasInforme = pstInforme.executeUpdate();
+
+                    if (filasAfectadasInforme > 0) {
+                        limpiarFormularioinforme(); // Limpia los campos
+                        texttitulo.requestFocus(); // Hace foco en el campo de título
+                        return true;
+                    }
+                }
+                return false;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            mostrarAlerta("Error", "Por favor, complete todos los campos.");
+            return false;
+        }
+    }
+
+    public boolean eliminarDocumentos(int idDocumento) {
+        String sql = "DELETE FROM documento WHERE id_documento = ?";
+
+        try (java.sql.Connection con = new Conexion().conectar(); PreparedStatement pst = con.prepareStatement(sql)) {
+
+            // Establecer el parámetro id_documento
+            pst.setInt(1, idDocumento);
+
+            // Ejecutar la consulta
+            int filasAfectadas = pst.executeUpdate();
+
+            // Verificar si se eliminó algún registro
+            if (filasAfectadas > 0) {
+                System.out.println("Registro eliminado correctamente.");
+                return true;
+            } else {
+                System.out.println("No se encontró un registro con el id_documento especificado.");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error al eliminar el documento. Detalles: " + e.getMessage());
+            return false;
+        }
     }
     /*
     public void configurarDatePicker(JFXDatePicker datePicker) {

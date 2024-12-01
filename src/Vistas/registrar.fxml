@@ -25,11 +25,6 @@
       <JFXDialog fx:id="dialog" prefWidth="884.0" />
       <AnchorPane id="AnchorPane" fx:id="base" prefHeight="660.0" prefWidth="1277.0" style="-fx-background-color: #03306C;">
          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="61.0" prefHeight="70.0" prefWidth="208.0" text="Registrar" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Open Sans Regular" size="48.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="53.0" fitWidth="60.0" layoutX="221.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/icons8-registro-100.png" />
@@ -670,7 +665,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </JFXButton>
-                                    <ImageView fitHeight="42.0" fitWidth="39.0" layoutX="90.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="42.0" fitWidth="39.0" layoutX="112.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/icons8-salida-100.png" />
                                        </image>
@@ -716,6 +711,11 @@
                   <Image url="@../img/icons8-salida-100.png" />
                </image>
             </ImageView>
+            <Label fx:id="labelreg" alignment="CENTER" layoutX="14.0" layoutY="61.0" prefHeight="70.0" prefWidth="208.0" text="Registrar" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Regular" size="48.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

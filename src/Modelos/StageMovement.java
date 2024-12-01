@@ -7,6 +7,7 @@ package Modelos;
 import Controladores.BuscarController;
 import Controladores.InicioController;
 import Controladores.LoginController;
+import Controladores.RegistrarController;
 import animatefx.animation.FadeIn;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -63,6 +64,72 @@ public class StageMovement {
             root = load.load();
             BuscarController ac = load.getController();
             ac.setviewpane(viewpane);
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+    public void loadpagemodificarlibro(String page, AnchorPane viewpane, Libro lib) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            RegistrarController ac = load.getController();
+            ac.setviewpane(viewpane);
+            ac.setpanemodlibro(lib);
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+    public void loadpagemodificartesis(String page, AnchorPane viewpane, TrabajoGrado tesis) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            RegistrarController ac = load.getController();
+            ac.setviewpane(viewpane);
+            ac.setpanemodtesis(tesis);
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+    public void loadpagemodificarinforme(String page, AnchorPane viewpane, InformePasantia inf) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            RegistrarController ac = load.getController();
+            ac.setviewpane(viewpane);
+            ac.setpanemodinforme(inf);
 
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

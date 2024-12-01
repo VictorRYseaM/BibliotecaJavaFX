@@ -4,7 +4,12 @@
  */
 package Controladores;
 
+import Modelos.Buscarmodel;
+import Modelos.Documento;
+import Modelos.InformePasantia;
+import Modelos.Libro;
 import Modelos.StageMovement;
+import Modelos.TrabajoGrado;
 import Modelos.registmodel;
 import animatefx.animation.FadeIn;
 import animatefx.animation.FadeOut;
@@ -20,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,6 +75,9 @@ public class RegistrarController implements Initializable {
     @FXML
     private JFXDialog dialog;
     @FXML
+    private Label labelreg;
+
+    @FXML
     private DatePicker fecha;
     @FXML
     private JFXTextField codtesis;
@@ -92,7 +101,10 @@ public class RegistrarController implements Initializable {
 
     @FXML
     private JFXTextField textfecha;
-
+    @FXML
+    private JFXButton btnregistrar;
+    @FXML
+    private JFXButton btnregistrar2;
     @FXML
     private JFXButton btnbuscararchivo;
 
@@ -104,7 +116,8 @@ public class RegistrarController implements Initializable {
 
     @FXML
     private JFXButton btnimgportada;
-
+    @FXML
+    private JFXButton btnvolver;
     @FXML
     private Pane paneInforme;
 
@@ -209,6 +222,9 @@ public class RegistrarController implements Initializable {
     private byte[] pdfportada;
     private StageMovement stmodel = new StageMovement();
     private final registmodel registrarmodel = new registmodel();
+    private Libro lib;
+    private InformePasantia informe;
+    private TrabajoGrado tesis;
 
     public void setviewpane(AnchorPane viewpane) {
         this.viewp = viewpane;
@@ -640,13 +656,13 @@ public class RegistrarController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        cbdocumento.getItems().addAll("Trabajos de Grado", "Informes de Pasantia", "Libros");
+        cbdocumento.getItems().addAll("Trabajos de Grado", "Informes de Pasantía", "Libros");
         cbcarrera.getItems().addAll("Arquitectura", "Ing. Civil", "Ing. Eléctrica", "Ing. Electrónica", "Ing. Industrial", "Ing. en Mtto. Mecánico", "Ing. de Sistemas", "Ing. en Diseño Industrial", "Ing. Química", "Ing. de Petróleo");
         cbcarrera2.getItems().addAll("Arquitectura", "Ing. Civil", "Ing. Eléctrica", "Ing. Electrónica", "Ing. Industrial", "Ing. en Mtto. Mecánico", "Ing. de Sistemas", "Ing. en Diseño Industrial", "Ing. Química", "Ing. de Petróleo");
         cbdocumento.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             cambiarPane(newValue);
         });
-        
+
         limitarnumerosycomasbolas(textcedula);
         //registrarmodel.configurarDatePicker(fecha);
     }
@@ -740,6 +756,268 @@ public class RegistrarController implements Initializable {
             }
 
         }
+    }
+
+    @FXML
+    public void setpanemodlibro(Libro lib) {
+
+        paneini.setVisible(false);
+        paneInforme.setVisible(false);
+        paneTesis.setVisible(false);
+        panelibros.setVisible(true);
+
+        this.lib = lib;
+        texttitulo3.setText(lib.getTitulo());
+        textautor3.setText(lib.getAutor());
+        textedicion.setText(lib.getEdicion());
+        textestante.setText(lib.getEstante());
+        texteditorial.setText(lib.getEditorial());
+        textlomo.setText(lib.getCod_lomo());
+        fecha3.setValue(lib.getFecha_publicacion());
+
+        if (lib.getImg_portada() != null) {
+            this.pdfportada = lib.getImg_portada();
+            imgportada3.setImage(imgyes);
+        } else {
+            imgportada3.setImage(imgnop);
+        }
+
+        if (lib.getIndice() != null) {
+            this.pdfindice = lib.getIndice();
+            imgindice3.setImage(imgyes);
+        } else {
+            imgindice3.setImage(imgnop);
+        }
+
+        if (lib.getResumen() != null) {
+            this.resumenpdf = lib.getResumen();
+            imgresumen3.setImage(imgyes);
+        } else {
+            imgresumen3.setImage(imgnop);
+        }
+
+        if (lib.getArchivopdf() != null) {
+            try {
+                // Convierte los bytes en un archivo PDF
+                this.selectedFile = Documento.convertirByteAArchivo2(lib.getArchivopdf(), lib.getTitulo());
+                imgarchivo3.setImage(imgyes); // Cambia la imagen indicando éxito
+            } catch (IOException ex) {
+                Logger.getLogger(RegistrarController.class.getName()).log(Level.SEVERE, "Error al convertir bytes a archivo PDF", ex);
+                imgarchivo3.setImage(imgnop); // Cambia la imagen indicando fallo
+            }
+        } else {
+            imgarchivo3.setImage(imgnop); // Si no hay archivo, muestra imagen de error
+        }
+
+        btnregistrar3.setText("Modificar");
+        labelreg.setText("Modificar");
+
+        cbdocumento.setValue("Libros"); // Establecer "Libros" como opción seleccionada
+        cbdocumento.setEditable(false); // No permitir escribir en el ComboBox
+        cbdocumento.setDisable(true);   // Deshabilitar para que no pueda cambiarse
+
+        // Cambiar dinámicamente el evento del botón
+        btnregistrar3.setOnMouseClicked(e -> modificarLibro());
+        btnvolver.setOnMouseClicked(e -> volveralibro());
+        // Configurar el ComboBox
+
+    }
+
+    @FXML
+    public void modificarLibro() {
+        registmodel modif = new registmodel(texttitulo3, textautor3, texteditorial, textedicion, textestante, textlomo, cbdocumento, fecha3, selectedFile, pdfindice, resumenpdf, pdfportada);
+        boolean registrado = modif.modificarDocumentoYLibro(lib.getId_documento());
+        if (registrado) {
+            // Mostrar mensaje de éxito
+            imgarchivo3.setImage(imgnop);
+            imgindice3.setImage(imgnop);
+            imgportada3.setImage(imgnop);
+            imgresumen3.setImage(imgnop);
+            mostrarMensaje("Modificación exitosa", "Los datos han sido modificados correctamente.");
+        } else {
+            // Mostrar mensaje de error
+            mostrarMensaje("Error", "Hubo un problema al registrar los datos.");
+        }
+    }
+
+    @FXML
+    public void volveralibro() {
+        Buscarmodel busqueda = new Buscarmodel();
+        busqueda.loadpagelibro("visualizaciondellibro", viewp, lib.getId_documento());
+    }
+
+    @FXML
+    public void setpanemodtesis(TrabajoGrado tesis) {
+
+        paneini.setVisible(false);
+        paneInforme.setVisible(false);
+        paneTesis.setVisible(true);
+        panelibros.setVisible(false);
+
+        this.tesis = tesis;
+        texttitulo.setText(tesis.getTitulo());
+        textautor.setText(tesis.getAutor());
+        textcedula.setText(tesis.getCedula());
+        codtesis.setText(tesis.getCodigo());
+        cbcarrera.setValue(tesis.getCarrera());
+        fecha.setValue(tesis.getFecha_publicacion());
+
+        if (tesis.getImg_portada() != null) {
+            this.pdfportada = tesis.getImg_portada();
+            imgportada.setImage(imgyes);
+        } else {
+            imgportada.setImage(imgnop);
+        }
+
+        if (tesis.getIndice() != null) {
+            this.pdfindice = tesis.getIndice();
+            imgindice.setImage(imgyes);
+        } else {
+            imgindice.setImage(imgnop);
+        }
+
+        if (tesis.getResumen() != null) {
+            this.resumenpdf = tesis.getResumen();
+            imgresumen.setImage(imgyes);
+        } else {
+            imgresumen.setImage(imgnop);
+        }
+
+        if (tesis.getArchivopdf() != null) {
+            try {
+                // Convierte los bytes en un archivo PDF
+                this.selectedFile = Documento.convertirByteAArchivo2(tesis.getArchivopdf(), tesis.getTitulo());
+
+                imgarchivo.setImage(imgyes); // Cambia la imagen indicando éxito
+            } catch (IOException ex) {
+                Logger.getLogger(RegistrarController.class.getName()).log(Level.SEVERE, "Error al convertir bytes a archivo PDF", ex);
+                imgarchivo.setImage(imgnop); // Cambia la imagen indicando fallo
+            }
+        } else {
+            imgarchivo.setImage(imgnop); // Si no hay archivo, muestra imagen de error
+        }
+
+        btnregistrar.setText("Modificar");
+        labelreg.setText("Modificar");
+        cbdocumento.setValue("Trabajos de Grado"); // Establecer "Libros" como opción seleccionada
+        cbdocumento.setEditable(false); // No permitir escribir en el ComboBox
+        cbdocumento.setDisable(true);   // Deshabilitar para que no pueda cambiarse
+
+        // Cambiar dinámicamente el evento del botón
+        btnregistrar.setOnMouseClicked(e -> modificarTesis());
+        btnvolver.setOnMouseClicked(e -> volveratesis());
+        // Configurar el ComboBox
+
+    }
+
+    @FXML
+    public void modificarTesis() {
+        registmodel modif = new registmodel(texttitulo, textautor, textcedula, codtesis, cbcarrera, cbdocumento, fecha, pdfindice, resumenpdf, pdfportada, tesis.getArchivopdf());
+        boolean registrado = modif.modificarDocumentoYtesis(tesis.getId_documento());
+        if (registrado) {
+            // Mostrar mensaje de éxito
+            imgarchivo.setImage(imgnop);
+            imgindice.setImage(imgnop);
+            imgportada.setImage(imgnop);
+            imgresumen.setImage(imgnop);
+            mostrarMensaje("Modificación exitosa", "Los datos han sido modificados correctamente.");
+        } else {
+            // Mostrar mensaje de error
+            mostrarMensaje("Error", "Hubo un problema al registrar los datos.");
+        }
+    }
+
+    @FXML
+    public void volveratesis() {
+        Buscarmodel busqueda = new Buscarmodel();
+        busqueda.loadpagetesis("visualizaciontrabajosdegrado2", viewp, tesis.getId_documento());
+    }
+
+    @FXML
+    public void setpanemodinforme(InformePasantia informe) {
+
+        paneini.setVisible(false);
+        paneInforme.setVisible(true);
+        paneTesis.setVisible(false);
+        panelibros.setVisible(false);
+
+        this.informe = informe;
+        texttitulo2.setText(informe.getTitulo());
+        textautor2.setText(informe.getAutor());
+        textcedula2.setText(informe.getCedula());
+        textempresa.setText(informe.getEmpresa());
+        cbcarrera2.setValue(informe.getCarrera());
+        fecha2.setValue(informe.getFecha_publicacion());
+
+        if (informe.getImg_portada() != null) {
+            this.pdfportada = informe.getImg_portada();
+            imgportada2.setImage(imgyes);
+        } else {
+            imgportada2.setImage(imgnop);
+        }
+
+        if (informe.getIndice() != null) {
+            this.pdfindice = informe.getIndice();
+            imgindice2.setImage(imgyes);
+        } else {
+            imgindice2.setImage(imgnop);
+        }
+
+        if (informe.getResumen() != null) {
+            this.resumenpdf = informe.getResumen();
+            imgresumen2.setImage(imgyes);
+        } else {
+            imgresumen2.setImage(imgnop);
+        }
+
+        if (informe.getArchivopdf() != null) {
+            try {
+                // Convierte los bytes en un archivo PDF
+                this.selectedFile = Documento.convertirByteAArchivo2(informe.getArchivopdf(), informe.getTitulo());
+
+                imgarchivo2.setImage(imgyes); // Cambia la imagen indicando éxito
+            } catch (IOException ex) {
+                Logger.getLogger(RegistrarController.class.getName()).log(Level.SEVERE, "Error al convertir bytes a archivo PDF", ex);
+                imgarchivo2.setImage(imgnop); // Cambia la imagen indicando fallo
+            }
+        } else {
+            imgarchivo2.setImage(imgnop); // Si no hay archivo, muestra imagen de error
+        }
+
+        btnregistrar2.setText("Modificar");
+        labelreg.setText("Modificar");
+        cbdocumento.setValue("Informes de Pasantía"); // Establecer "Libros" como opción seleccionada
+        cbdocumento.setEditable(false); // No permitir escribir en el ComboBox
+        cbdocumento.setDisable(true);   // Deshabilitar para que no pueda cambiarse
+
+        // Cambiar dinámicamente el evento del botón
+        btnregistrar2.setOnMouseClicked(e -> modificarInforme());
+        btnvolver.setOnMouseClicked(e -> volverainforme());
+        // Configurar el ComboBox
+
+    }
+
+    @FXML
+    public void modificarInforme() {
+        registmodel modif = new registmodel(texttitulo2, textautor2, textcedula2, textempresa, cbcarrera2, cbdocumento, fecha2, pdfindice, resumenpdf, pdfportada, selectedFile);
+        boolean registrado = modif.modificarDocumentoYInformePasantia(informe.getId_documento());
+        if (registrado) {
+            // Mostrar mensaje de éxito
+            imgarchivo2.setImage(imgnop);
+            imgindice2.setImage(imgnop);
+            imgportada2.setImage(imgnop);
+            imgresumen2.setImage(imgnop);
+            mostrarMensaje("Modificación exitosa", "Los datos han sido modificados correctamente.");
+        } else {
+            // Mostrar mensaje de error
+            mostrarMensaje("Error", "Hubo un problema al registrar los datos.");
+        }
+    }
+
+    @FXML
+    public void volverainforme() {
+        Buscarmodel busqueda = new Buscarmodel();
+        busqueda.loadpageinforme("vistapasantias", viewp, informe.getId_documento());
     }
 
 }

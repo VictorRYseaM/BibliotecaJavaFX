@@ -34,7 +34,7 @@
          </effect>
       </ImageView>
       <Line endX="34.75" layoutX="110.0" layoutY="59.0" startX="-100.0" stroke="#ff914d" strokeWidth="5.0" />
-      <JFXButton fx:id="btnvolver" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="1127.0" layoutY="602.0" prefHeight="55.0" prefWidth="127.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Volver" textFill="#fbfcfc">
+      <JFXButton fx:id="btnvolver" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="1127.0" layoutY="602.0" onMouseClicked="#volver" prefHeight="55.0" prefWidth="127.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Volver" textFill="#fbfcfc">
          <font>
             <Font name="Open Sans Bold" size="19.0" />
          </font>

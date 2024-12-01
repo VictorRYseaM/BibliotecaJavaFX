@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VistaLibroController">
+<StackPane fx:id="base" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VistaLibroController">
    <children>
       <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1277.0" style="-fx-background-color: #03306C;">
          <children>
@@ -38,10 +38,13 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="360.0" prefWidth="310.0">
                      <children>
-                        <ImageView fx:id="imgportada" fitHeight="325.0" fitWidth="296.0" pickOnBounds="true">
+                        <ImageView fx:id="imgportada" fitHeight="325.0" fitWidth="296.0" onMouseClicked="#verportada" pickOnBounds="true">
                            <image>
                               <Image url="@../../../../../Pictures/Camera%20Roll/WIN_20241129_11_58_12_Pro.jpg" />
                            </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -55,7 +58,7 @@
                                           <Insets left="30.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <JFXButton fx:id="btnvolver2" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" prefHeight="45.0" prefWidth="133.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Editar" textFill="#fbfcfc">
+                                    <JFXButton fx:id="btneditar" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#editar" prefHeight="45.0" prefWidth="133.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Editar" textFill="#fbfcfc">
                                        <font>
                                           <Font name="Open Sans Bold" size="19.0" />
                                        </font>
@@ -71,7 +74,7 @@
                                           <Image url="@../img/error.png" />
                                        </image>
                                     </ImageView>
-                                    <JFXButton fx:id="btnvolver21" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" prefHeight="45.0" prefWidth="158.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Eliminar" textFill="#fbfcfc">
+                                    <JFXButton fx:id="btneliminar" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#eliminar" prefHeight="45.0" prefWidth="158.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Eliminar" textFill="#fbfcfc">
                                        <font>
                                           <Font name="Open Sans Bold" size="19.0" />
                                        </font>
@@ -94,7 +97,7 @@
                         <Insets top="10.0" />
                      </padding>
                   </VBox>
-                  <ScrollPane hbarPolicy="NEVER" style="-fx-background-color: transparent;" stylesheets="@../css/scrollpanestyles.css" vbarPolicy="ALWAYS">
+                  <ScrollPane fx:id="scroller" hbarPolicy="NEVER" style="-fx-background-color: transparent;" stylesheets="@../css/scrollpanestyles.css" vbarPolicy="ALWAYS">
                      <content>
                         <VBox prefHeight="635.0" prefWidth="426.0">
                            <children>
@@ -180,7 +183,7 @@
                                     <Image url="@../img/papel%20(1).png" />
                                  </image>
                               </ImageView>
-                              <JFXButton fx:id="btnvolver1" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#volver" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Ver resumen" textFill="#fbfcfc">
+                              <JFXButton fx:id="btnresumen" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#verresumen" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Ver resumen" textFill="#fbfcfc">
                                  <font>
                                     <Font name="Open Sans Bold" size="19.0" />
                                  </font>
@@ -203,7 +206,7 @@
                                     <Image url="@../img/ver-lista.png" />
                                  </image>
                               </ImageView>
-                              <JFXButton fx:id="btnvolver11" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#volver" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Ver Indice" textFill="#fbfcfc">
+                              <JFXButton fx:id="btnindice" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#verindice" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Ver Indice" textFill="#fbfcfc">
                                  <font>
                                     <Font name="Open Sans Bold" size="19.0" />
                                  </font>
@@ -246,7 +249,7 @@
                                     <Insets top="10.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <JFXButton fx:id="btnvolver111" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#volver" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Compartir" textFill="#fbfcfc">
+                              <JFXButton fx:id="btncompartir" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#mostrarDialogoCorreo" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Compartir" textFill="#fbfcfc">
                                  <font>
                                     <Font name="Open Sans Bold" size="19.0" />
                                  </font>
@@ -275,7 +278,7 @@
                                     <Insets top="20.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <JFXButton fx:id="btnvolver11111" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#volver" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Descargar PDF" textFill="#fbfcfc">
+                              <JFXButton fx:id="btndescargar" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#guardararchivo" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Descargar PDF" textFill="#fbfcfc">
                                  <font>
                                     <Font name="Open Sans Bold" size="19.0" />
                                  </font>

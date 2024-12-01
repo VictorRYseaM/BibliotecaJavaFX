@@ -8,6 +8,7 @@ import Modelos.Buscarmodel;
 import Modelos.Documento;
 import Modelos.InformePasantia;
 import Modelos.Libro;
+import Modelos.StageMovement;
 import Modelos.TrabajoGrado;
 import animatefx.animation.FadeIn;
 import animatefx.animation.FadeInLeft;
@@ -42,6 +43,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -69,6 +71,7 @@ public class BuscarController implements Initializable {
     private Buscarmodel filtroscb = new Buscarmodel();
     private Buscarmodel busquedamdl = new Buscarmodel();
     private Buscarmodel pdfimg = new Buscarmodel();
+    private StageMovement stmodel = new StageMovement();
 
     private JFXComboBox<String> pricingType; // ComboBox para tipo de documento
     private TextField searchField;          // Campo de texto para búsqueda
@@ -113,6 +116,11 @@ public class BuscarController implements Initializable {
 
     public void setviewpane(AnchorPane viewpane) {
         this.viewp = viewpane;
+    }
+
+    @FXML
+    public void volver(MouseEvent e) {
+        stmodel.loadpage("Inipro", viewp);
     }
 
     private void crearBarraDeBusqueda() {
@@ -164,7 +172,7 @@ public class BuscarController implements Initializable {
 
         // ComboBox para tipos de filtros
         pricingType = new JFXComboBox<>();
-        pricingType.getItems().addAll("Todos", "Trabajos de Grado", "Informes de Pasantia", "Libros");
+        pricingType.getItems().addAll("Todos", "Trabajos de Grado", "Informes de Pasantía", "Libros");
         pricingType.setValue("Todos");
         pricingType.setStyle("-fx-border-color: #FA731F; "
                 + "-fx-background-color: white; "
@@ -184,10 +192,20 @@ public class BuscarController implements Initializable {
         // Agregar un manejador de eventos para cuando se cambia la selección del ComboBox
         pricingType.setOnAction(event -> {
             String tipoSeleccionado = pricingType.getValue();  // Obtiene el valor seleccionado
+            // Mapear selección sin acento
+            String tipoProcesado;
+            switch (tipoSeleccionado) {
+                case "Informes de Pasantía":
+                    tipoProcesado = "Informes de Pasantia";
+                    break;
+                default:
+                    tipoProcesado = tipoSeleccionado;
+            }
+            System.out.println("Tipo seleccionado (sin acento): " + tipoProcesado);
             // Limpiar los filtros anteriores
             filtrosAdicionales.getChildren().clear();
             // Crear filtros según el tipo seleccionado
-            crearFiltrosPorTipo(tipoSeleccionado, filtrosAdicionales);
+            crearFiltrosPorTipo(tipoProcesado, filtrosAdicionales);
             new FadeInRight(filtrosAdicionales).play();
         });
 
@@ -412,15 +430,15 @@ public class BuscarController implements Initializable {
 
     private void abrirVistaDetalles(Documento document) {
         try {
-            
-            if(document.getTipo().equalsIgnoreCase("Libros")){
+
+            if (document.getTipo().equalsIgnoreCase("Libros")) {
                 busquedamdl.loadpagelibro("visualizaciondellibro", viewp, document.getId_documento());
-            }else if(document.getTipo().equalsIgnoreCase("Trabajos de Grado")){
-                busquedamdl.loadpagetesis("visualizaciondetrabajodegrado", viewp, document.getId_documento());
-            }else if(document.getTipo().equalsIgnoreCase("Informes de Pasantia")){
-                busquedamdl.loadpageinforme("visualizaciondepasantias", viewp, document.getId_documento());
+            } else if (document.getTipo().equalsIgnoreCase("Trabajos de Grado")) {
+                System.out.println("Se selecciono un trabajo de grado");
+                busquedamdl.loadpagetesis("visualizaciontrabajosdegrado2", viewp, document.getId_documento());
+            } else if (document.getTipo().equalsIgnoreCase("Informes de Pasantia") || document.getTipo().equalsIgnoreCase("Informes de Pasantía")) {
+                busquedamdl.loadpageinforme("vistapasantias", viewp, document.getId_documento());
             }
-           
 
         } catch (Exception e) {
             e.printStackTrace();

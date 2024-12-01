@@ -291,8 +291,13 @@ public class Buscarmodel {
             FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
             root = load.load();
             VistaTesisController ac = load.getController();
+            if(ac==null){
+                System.out.println("No se pudo obtener un controlador de la vista");
+            }else{
+                System.out.println("Controlador obtenido");
+            }
             ac.setviewpane(viewpane);
-            ac.setTesis(obtenerTesisPorId(id_doc));
+            ac.settesis(obtenerTesisPorId(id_doc));
 
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -350,7 +355,7 @@ public class Buscarmodel {
 
     public TrabajoGrado obtenerTesisPorId(int idDocumento) {
         TrabajoGrado tesis = null;
-
+        System.out.println("ID recibido para obtener tesis: " + idDocumento);
         String query = "SELECT d.titulo, d.tipo, d.autor, d.fecha_publicacion, d.resumen, "
                 + "d.indice, d.img_portada, d.archivopdf, "
                 + "t.carrera, t.codigo, t.cedula "
@@ -382,6 +387,8 @@ public class Buscarmodel {
                     tesis.setCarrera(rs.getString("carrera"));
                     tesis.setCodigo(rs.getString("codigo"));
                     tesis.setCedula(rs.getString("cedula"));
+                }else{
+                    System.out.println("NO se encontro un carajo e tesis");
                 }
             }
         } catch (SQLException e) {

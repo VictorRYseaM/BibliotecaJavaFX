@@ -14,7 +14,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -221,8 +225,6 @@ public class Documento {
         }
     }
 
- 
-
     public static Image convertPdfBytesToImageInformesyTesis(byte[] pdfBytes) throws IOException {
         // Crear un archivo temporal para cargar el PDF
         File tempFile = File.createTempFile("tempPdf", ".pdf");
@@ -253,6 +255,69 @@ public class Documento {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
             return new Image(inputStream);
+        }
+    }
+
+    public File convertirByteAArchivo(byte[] datos, String nombreArchivo) throws IOException {
+        File archivo = new File(nombreArchivo.endsWith(".pdf") ? nombreArchivo : nombreArchivo + ".pdf");
+        try (FileOutputStream fos = new FileOutputStream(archivo)) {
+            fos.write(datos);
+        }
+        return archivo;
+    }
+
+    public static File convertirByteAArchivo2(byte[] data, String nombreArchivo) throws IOException {
+        // Verifica que los datos no sean nulos o vacíos
+        if (data == null || data.length == 0) {
+            throw new IllegalArgumentException("El arreglo de bytes está vacío o es nulo.");
+        }
+
+        // Define un nombre único para el archivo en el sistema temporal
+        String tempDir = System.getProperty("java.io.tmpdir"); // Directorio temporal del sistema
+        File archivo = new File(tempDir, nombreArchivo + ".pdf");
+
+        // Escribe los datos en el archivo
+        try (FileOutputStream fos = new FileOutputStream(archivo)) {
+            fos.write(data);
+        }
+
+        return archivo; // Retorna el archivo creado
+    }
+
+    public void guardarArchivo(MouseEvent e, Documento doc) {
+        if (doc.getArchivopdf() == null || doc.getArchivopdf().length == 0) {
+            Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setHeaderText(null);
+            alert1.setTitle("Datos no encontrados");
+            alert1.setContentText("Parece que no tenemos un archivo almacenado");
+            alert1.showAndWait();
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar archivo PDF");
+
+        // Configuración de extensión por defecto
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos PDF (*.pdf)", "*.pdf");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Mostrar el cuadro de diálogo para guardar archivo
+        File archivoSeleccionado = fileChooser.showSaveDialog(((Stage) ((javafx.scene.Node) e.getSource()).getScene().getWindow()));
+
+        if (archivoSeleccionado != null) {
+            try {
+                // Convertir byte[] a archivo y guardar en la ubicación seleccionada
+                File archivoGuardado = convertirByteAArchivo(doc.getArchivopdf(), archivoSeleccionado.getAbsolutePath());
+                System.out.println("Archivo guardado en: " + archivoGuardado.getAbsolutePath());
+            } catch (IOException ex) {
+                System.err.println("Error al guardar el archivo: " + ex.getMessage());
+            }
+        } else {
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setHeaderText(null);
+            alert2.setTitle("Error en guardado");
+            alert2.setContentText("No se seleccionó una ubicación para guardar el archivo. ");
+            alert2.showAndWait();
         }
     }
 }
