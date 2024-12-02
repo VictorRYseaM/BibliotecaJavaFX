@@ -336,7 +336,7 @@ public class RegistrarController implements Initializable {
             event.consume(); // Bloquea la entrada no válida
         }
     }
-
+    //AQUI EMPIEZA EL CODIGO ARRIBA ESTAN LAS VALIDACIONES DE CAMPO
     @FXML
     private void abrirDialogo(MouseEvent event) {
         // Crear el contenido del diálogo
@@ -676,7 +676,7 @@ public class RegistrarController implements Initializable {
                 paneToShow = paneTesis;
                 elec = 1;
             }
-            case "Informes de Pasantia" -> {
+            case "Informes de Pasantía" -> {
                 paneToShow = paneInforme;
                 elec = 2;
             }
@@ -698,18 +698,7 @@ public class RegistrarController implements Initializable {
                 finalPaneToHide.setVisible(false);
                 finalPaneToShow.setVisible(true);
                 new FadeIn(finalPaneToShow).play();
-                /*
-                FadeOut fadeOut = new FadeOut(finalPaneToHide);
-                fadeOut.setOnFinished(event -> {
-                    finalPaneToHide.setVisible(false);
-                    finalPaneToShow.setVisible(true);
-
-                    // Crear animación para mostrar el nuevo pane
-                    FadeIn fadeIn = new FadeIn(finalPaneToShow);
-                    fadeIn.play();
-                });
-                fadeOut.play();
-                 */
+             
             } else if (paneToHide == null) {
                 // Si no hay un pane visible, simplemente mostrar el seleccionado
                 datosnuevapagina(elec);

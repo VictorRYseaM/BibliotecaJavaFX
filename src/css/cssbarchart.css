@@ -1,0 +1,83 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 1 dic. 2024, 4:50:04?p. m.
+    Author     : VictorY
+*/
+
+#barras {
+    -fx-background-color: linear-gradient(to bottom, #e0e0e0, #ffffff);
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+#barras .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+#barras .axis-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #03306C;
+}
+
+#barras .category-axis-label,
+#barras .number-axis-label {
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+}
+
+#barras .data-series .chart-bar {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 3, 0.3, 0, 1);
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+/* Aplica un color azul a las barras de la primera serie (Tesis) */
+#barras .data-series:nth-of-type(1) .chart-bar {
+    -fx-bar-fill: #03306C; /* Azul para Tesis */
+}
+
+/* Aplica un color naranja a las barras de la segunda serie (Informes) */
+#barras .data-series:nth-of-type(2) .chart-bar {
+    -fx-bar-fill: #FA731F; /* Naranja para Informes */
+}
+
+#barras .chart-legend {
+    
+    -fx-border-color: #FA731F;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-padding: 5px;
+    -fx-text-fill: black;
+}
+
+#barras .chart-legend-item:nth-of-type(1) {
+    -fx-background-color: #03306C; /* Azul para la primera serie (Tesis) */
+}
+
+#barras .chart-legend-item:nth-of-type(2) {
+    -fx-background-color: #FA731F; /* Naranja para la segunda serie (Informes) */
+}
+
+#barras .chart-legend-item {
+    -fx-background-color: transparent;
+    -fx-padding: 3px;
+    -fx-text-fill: black;
+}
+
+#barras .chart-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #03306C;
+}
+
+#barras .default-color0.chart-legend-item-symbol { -fx-bar-fill: #03306C; /* Color de la primera serie */ } 
+
+#barras .default-color1.chart-legend-item-symbol { -fx-bar-fill: #FA731F; /* Color de la segunda serie */}
+

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1277.0" style="-fx-border-color: 03306C;" stylesheets="@../css/prestamooficial.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PrestamosController">
+   <children>
+      <AnchorPane prefHeight="445.0" prefWidth="1277.0">
+         <children>
+            <BorderPane layoutX="88.0" layoutY="83.0" prefHeight="660.0" prefWidth="1277.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="129.0" prefWidth="1273.0" style="-fx-background-color: #03306c;" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets top="-10.0" />
+                     </padding>
+                     <children>
+                        <Line endX="228.93280029296875" endY="-1.52587890625E-5" layoutX="302.0" layoutY="111.0" startX="-140.12850952148438" startY="-3.0517578125E-5" stroke="#ff914d" strokeWidth="5.0" />
+                        <Label alignment="CENTER" layoutX="113.0" layoutY="36.0" prefHeight="79.0" prefWidth="366.0" text="Préstamos" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logopsm" fitHeight="70.0" fitWidth="73.0" layoutX="72.0" layoutY="36.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/logo_psm_dorado-removebg-preview.png" />
+                           </image>
+                           <effect>
+                              <DropShadow height="138.0" radius="58.302499999999995" spread="0.18" width="97.21" />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="logobanda" fitHeight="43.0" fitWidth="104.0" layoutX="54.0" layoutY="79.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../img/tira%20del%20logo.png" />
+                           </image>
+                           <effect>
+                              <DropShadow height="88.42" radius="47.3725" spread="0.2" width="103.07" />
+                           </effect>
+                        </ImageView>
+                        <ImageView fitHeight="61.0" fitWidth="75.0" layoutX="449.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/libro%20(2).png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="460.0" prefWidth="426.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/prestamooficial.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="25.0" layoutY="10.0" prefHeight="492.0" prefWidth="386.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/prestamooficial.css">
+                           <styleClass>
+                              <String fx:value="white-form" />
+                              <String fx:value="border" />
+                           </styleClass>
+                           <children>
+                              <Line endX="125.5279541015625" endY="-3.0517578125E-5" layoutX="204.0" layoutY="49.0" startX="-140.12850952148438" startY="-3.0517578125E-5" stroke="#ff914d" strokeWidth="5.0" />
+                              <Label layoutX="85.0" layoutY="4.0" prefHeight="45.0" prefWidth="231.0" text="Realizar Préstamo" textFill="#03306c">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton fx:id="bnaceptar" layoutX="59.0" layoutY="430.0" onMouseClicked="#registrarprestamo" prefHeight="42.0" prefWidth="105.0" style="-fx-background-color: #fa731f;" text="Aceptar" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <VBox layoutX="15.0" layoutY="79.0" prefHeight="325.0" prefWidth="356.0">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="231.0" text="Titulo del Documento" textFill="#03306c">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <JFXComboBox fx:id="cbbuscar" prefHeight="35.0" prefWidth="357.0" stylesheets="@../css/prestamooficial.css">
+                                       <styleClass>
+                                          <String fx:value="jfx-combo-box2" />
+                                          <String fx:value="combo-box" />
+                                       </styleClass>
+                                    </JFXComboBox>
+                                    <Label prefHeight="30.0" prefWidth="231.0" text="ID Documento" textFill="#03306c">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="txtIdDocumento" editable="false" prefHeight="25.0" prefWidth="334.0" styleClass="custom-jfx-text-field2" stylesheets="@../css/prestamooficial.css" />
+                                    <Label prefHeight="30.0" prefWidth="231.0" text="Clasificacion del Doc." textFill="#03306c">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="txtTipoDocumento" editable="false" prefHeight="25.0" prefWidth="334.0" styleClass="custom-jfx-text-field2" stylesheets="@../css/prestamooficial.css" />
+                                    <Label prefHeight="30.0" prefWidth="231.0" text="Cédula Estudiante/Profesor" textFill="#03306c">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="textcedula" prefHeight="25.0" prefWidth="334.0" promptText="Utilice el formato V-XXXXXXXX" styleClass="custom-jfx-text-field2" stylesheets="@../css/prestamooficial.css" />
+                                    <Label prefHeight="30.0" prefWidth="231.0" text=" Fecha y Hora del Prestamo" textFill="#03306c">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="textfecha" editable="false" prefHeight="25.0" prefWidth="334.0" styleClass="custom-jfx-text-field2" stylesheets="@../css/prestamooficial.css" />
+                                 </children>
+                              </VBox>
+                              <JFXButton fx:id="btncancelar" layoutX="216.0" layoutY="431.0" onMouseClicked="#limpiar" prefHeight="42.0" prefWidth="105.0" style="-fx-background-color: #fa731f;" text="Limpiar" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="507.0" prefWidth="842.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/prestamooficial.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="9.0" layoutY="9.0" prefHeight="444.0" prefWidth="811.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/prestamooficial.css">
+                           <styleClass>
+                              <String fx:value="white-form" />
+                              <String fx:value="border" />
+                              <String fx:value="table-view" />
+                              <String fx:value="column-header" />
+                              <String fx:value="column-header-background" />
+                              <String fx:value="filler" />
+                              <String fx:value="label" />
+                           </styleClass>
+                           <children>
+                              <Label layoutX="313.0" layoutY="4.0" prefHeight="45.0" prefWidth="237.0" text="Prestamos Realizados" textFill="#03306c">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="118.360107421875" endY="-3.0517578125E-5" layoutX="439.0" layoutY="42.0" startX="-140.12850952148438" startY="-3.0517578125E-5" stroke="#ff914d" strokeWidth="5.0" />
+                              <TableView fx:id="tablaprestamos" layoutX="1.0" layoutY="55.0" prefHeight="385.0" prefWidth="819.0" style="-fx-background-color: #fffff;" stylesheets="@../css/prestamooficial.css">
+                                <columns>
+                                    <TableColumn fx:id="colIdPrestamo" prefWidth="119.1016845703125" text="ID Prestamo" />
+                                    <TableColumn fx:id="colIdDocumento" prefWidth="96.446044921875" text="ID Documento" />
+                                    <TableColumn fx:id="colTitulo" prefWidth="149.54559326171875" text="Titulo" />
+                                  <TableColumn fx:id="colTipo" prefWidth="123.5518798828125" text="Tipo" />
+                                  <TableColumn fx:id="colCedula" prefWidth="87.21987915039062" text="Cedula" />
+                                    <TableColumn fx:id="colFechaHora" prefWidth="117.10162353515625" text="Fecha y Hora" />
+                                    <TableColumn fx:id="colEstado" prefWidth="116.0" text="Estado" />
+                                </columns>
+                                 <styleClass>
+                                    <String fx:value="table-view" />
+                                    <String fx:value="column-header" />
+                                    <String fx:value="column-header-background" />
+                                    <String fx:value="filler" />
+                                    <String fx:value="label" />
+                                 </styleClass>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                        <HBox layoutX="499.0" layoutY="458.0">
+                           <children>
+                              <JFXButton prefHeight="44.0" prefWidth="144.0" style="-fx-background-color: #ffffff;" text="Ver Reportes" textFill="#03306c">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <ImageView fitHeight="41.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/papel%20(2).png" />
+                                 </image>
+                              </ImageView>
+                              <JFXButton fx:id="btnvolver" onMouseClicked="#volver" prefHeight="44.0" prefWidth="89.0" style="-fx-background-color: #ffffff;" text="Volver" textFill="#03306c">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <ImageView fitHeight="40.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/salida-de-emergencia.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                     </children>
+                     <styleClass>
+                        <String fx:value="column-header" />
+                        <String fx:value="column-header-background" />
+                     </styleClass>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+   <styleClass>
+      <String fx:value="column-header" />
+      <String fx:value="border" />
+      <String fx:value="column-header-background" />
+      <String fx:value="filler" />
+      <String fx:value="label" />
+      <String fx:value="table-view" />
+      <String fx:value="white-form" />
+   </styleClass>
+</StackPane>

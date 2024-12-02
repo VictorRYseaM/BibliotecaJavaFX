@@ -1,0 +1,96 @@
+
+
+.white-form{
+    -fx-background-color:#ffffff;
+    -fx-background-border:5px;
+    
+}
+
+.border{
+    -fx-border-color:#03306c;
+    -fx-border-width:2px;
+    -fx-border-radius:5px;
+    
+}
+
+.table-view{
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-border-color:#03306c;
+    -fx-border-radius:5px;
+    -fx-border-width:2px;
+    
+    
+}
+
+.table-view.column-header{
+    -fx-alignment:CENTER;
+    
+}
+
+.table-view.column-header-background{
+    -fx-background-color:#03306c;
+    -fx-background-radius:8px 8px 0 0;
+    -fx-background-inset:0 0 0 0;
+    
+}
+
+.table-view.column-header, .filler{
+    -fx-background-color:transparent;
+    -fx-size:50px;
+   
+}
+.table-view.column-header.label{
+    -fx-text-fill:#ffffff;
+    -fx-font-family:arial;
+    
+    
+}
+.table-view.column-header, filter{
+    -fx-background-color:transparent;
+    -fx-size:50px;
+    
+}
+
+
+
+.jfx-combo-box2 {
+    -fx-font-size: 15px; /* Tamaño de la fuente */
+    -fx-font-family: "Open Sans", sans-serif; /* Fuente Open Sans */
+    -fx-text-inner-color: black; /* Cambia el color del texto ingresado */
+    -fx-text-fill: black; /* Texto blanco en el campo del combo */
+    -fx-prompt-text-fill: black; /* Texto del prompt en blanco */
+}
+
+/* outer combo-box text */
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-font-weight: bold; /* Negrita en los elementos */
+}
+
+/* combo-box list view text, not hovered or focused */
+.combo-box .list-view .list-cell {
+    -fx-text-fill: black;
+    -fx-font-weight: bold; /* Negrita en los elementos del listado */
+}
+
+/* combo-box selected text */
+.combo-box .list-view .list-cell:focused {
+    -fx-background-color : #03306C;  /* Cadet Blue */
+    -fx-text-fill: white;
+    -fx-font-weight: bold; /* Negrita en el texto seleccionado */
+}
+
+/* combo-box hover text */
+.combo-box .list-view .list-cell:hover {
+    -fx-background-color : #03306C;  /* Cadet Blue */
+    -fx-text-fill: white;
+    -fx-font-weight: bold; /* Negrita en el texto cuando pasa el mouse */
+}
+
+.custom-jfx-text-field2 {
+    -fx-prompt-text-fill: #939393; /* Cambia el color aquí según tus preferencias */
+    -fx-text-inner-color: black; /* Cambia el color del texto ingresado */
+    -fx-font-family: "Open Sans";
+    -fx-font-size: 15px;
+}

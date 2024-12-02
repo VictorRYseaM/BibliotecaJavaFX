@@ -1,0 +1,62 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 1 dic. 2024, 1:11:42?a. m.
+    Author     : VictorY
+*/
+
+.image-view-container {
+    -fx-background-color: linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.8) 100%);
+}
+.rounded-pane {
+    -fx-background-color: white; /* Color de fondo del Pane */
+    -fx-background-radius: 15px; /* Bordes redondeados */
+    -fx-border-radius: 15px; /* Bordes redondeados del borde */
+    -fx-border-color: #d1d1d1; /* Color del borde */
+    -fx-border-width: 1px; /* Ancho del borde */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 2); /* Sombra */
+    -fx-padding: 10px; /* Espaciado interno opcional */
+}
+
+#lineas .chart {
+    -fx-background-color: #ffffff; /* Fondo blanco */
+    -fx-border-color: #e0e0e0; /* Bordes suaves */
+    -fx-border-width: 2px;
+}
+
+#lineas .chart-title {
+    -fx-text-fill: #333333; /* Color del texto del título */
+    -fx-font-size: 16px;
+    -fx-font-family: 'Open Sans', sans-serif; /* Fuente Material Design */
+}
+
+#lineas .chart-series-line {
+    -fx-stroke: #032E67; /**/
+    -fx-stroke-width: 3px;
+}
+
+#lineas .chart-legend-item-symbol {
+    -fx-background-color: #032E67, white;
+    
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 5px;
+}
+
+#lineas .axis-label {
+    -fx-text-fill: #757575; /* Color de etiquetas de eje */
+    -fx-font-size: 12px;
+    -fx-border-color: #FA731F;
+    
+    -fx-font-family: 'Open Sans', sans-serif;
+}
+
+#lineas .chart-legend {
+    -fx-background-color: #F0F0F0; /* Cambia el color de fondo de la leyenda */
+    -fx-border-color: #FA731F; /* Cambia el color del borde de la leyenda */
+    -fx-border-width: 1px; /* Define el grosor del borde */
+    -fx-padding: 5px; /* Espaciado interno */
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px; /* Bordes redondeados */
+}

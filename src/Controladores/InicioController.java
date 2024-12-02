@@ -7,6 +7,7 @@ package Controladores;
 import Modelos.StageMovement;
 import Modelos.Ajustesmodel;
 import Modelos.Buscarmodel;
+import Modelos.PrestamosModel;
 import Modelos.registmodel;
 import animatefx.animation.BounceIn;
 import animatefx.animation.Flash;
@@ -90,6 +91,7 @@ public class InicioController implements Initializable {
     private Ajustesmodel ajmodel = new Ajustesmodel();
     private registmodel rgmodel = new registmodel();
     private Buscarmodel bsmodel = new Buscarmodel();
+    private PrestamosModel prmodel = new PrestamosModel();
 
     //@FXML
     //private ImageView imagen;
@@ -123,7 +125,7 @@ public class InicioController implements Initializable {
     }
 
     public void pagprestamos(MouseEvent e) {
-        stmodel.loadpage("prestamos", viewpane);
+        prmodel.loadpage("Prestamooficial", viewpane);
     }
 
     public void pagdepuracion(MouseEvent e) {

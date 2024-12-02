@@ -39,7 +39,12 @@ public class Documento {
     private byte[] Indice;
     private byte[] Img_portada;
     private byte[] Archivopdf;
-
+    
+    public Documento(int id_documento, String Tipo){
+        this.id_documento = id_documento;
+        this.Tipo = Tipo;
+    }
+    
     public Documento(int id_documento, String Titulo, String Tipo, String Autor, LocalDate Fecha_publicacion, byte[] Resumen, byte[] Indice, byte[] Img_portada, byte[] Archivopdf) {
         this.id_documento = id_documento;
         this.Titulo = Titulo;

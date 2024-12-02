@@ -1,15 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="1277.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.IniproController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="1276.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.IniproController">
    <children>
-      <Label alignment="BASELINE_CENTER" layoutX="297.0" layoutY="296.0" prefHeight="70.0" prefWidth="746.0" text="Pagina de inicio que inicia xd">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
+      <Pane layoutX="34.0" layoutY="80.0" prefHeight="233.0" prefWidth="679.0" styleClass="rounded-pane" stylesheets="@../css/cssinicio.css">
+         <children>
+            <Line endY="132.0" layoutX="215.0" layoutY="76.0" startY="-53.0" strokeLineJoin="ROUND" />
+            <StackPane fx:id="stacktesis" layoutX="12.0" layoutY="19.0" prefHeight="195.0" prefWidth="190.0" />
+            <Line endY="132.0" layoutX="441.0" layoutY="76.0" startY="-53.0" strokeLineJoin="ROUND" />
+            <StackPane fx:id="stacklibros" layoutX="236.0" layoutY="19.0" prefHeight="195.0" prefWidth="190.0" />
+            <StackPane fx:id="stackinformes" layoutX="475.0" layoutY="19.0" prefHeight="195.0" prefWidth="190.0" />
+         </children>
+      </Pane>
+      <Pane layoutX="744.0" layoutY="81.0" prefHeight="233.0" prefWidth="493.0" styleClass="rounded-pane" stylesheets="@../css/cssinicio.css">
+         <children>
+            <StackPane layoutX="7.0" layoutY="7.0" prefHeight="222.0" prefWidth="482.0">
+               <children>
+                  <LineChart id="lineas" fx:id="linepresta" style="-fx-border-color: transparent;" stylesheets="@../css/cssinicio.css" title="asdasd">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+               </children>
+            </StackPane>
+         </children></Pane>
+      <Pane layoutX="34.0" layoutY="334.0" prefHeight="312.0" prefWidth="1204.0" style="-fx-background-color: white;" styleClass="rounded-pane" stylesheets="@../css/cssinicio.css">
+         <children>
+            <StackPane layoutX="8.0" layoutY="3.0" prefHeight="306.0" prefWidth="1188.0">
+               <children>
+                  <BarChart id="barras" fx:id="barras" styleClass="bar-chart" stylesheets="@../css/cssbarchart.css">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </StackPane>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
