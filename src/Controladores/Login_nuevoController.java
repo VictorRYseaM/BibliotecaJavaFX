@@ -48,6 +48,12 @@ public class Login_nuevoController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    private Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
     @FXML
     ImageView logopsm;
     @FXML

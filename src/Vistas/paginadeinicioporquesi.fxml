@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1280.0" style="-fx-background-color: #03306c;" styleClass="linear-grad2" stylesheets="@../css/Lgoin.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PaginaInicioController">
+   <children>
+      <VBox fx:id="vboxestudiantes" alignment="CENTER" layoutX="161.0" layoutY="267.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="208.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/reading-book.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="btningresar" onAction="#estudiantes" prefHeight="55.0" prefWidth="272.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Estudiante" textFill="#fbfcfc">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </VBox>
+      <VBox fx:id="vboxadmin" alignment="CENTER" layoutX="881.0" layoutY="267.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="208.0" fitWidth="201.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/administrator.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <JFXButton fx:id="btningresar1" onAction="#login" prefHeight="55.0" prefWidth="272.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Administrador" textFill="#fbfcfc">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </VBox>
+      <Label fx:id="labelbienvenida" alignment="CENTER" layoutX="130.0" layoutY="52.0" prefHeight="105.0" prefWidth="1019.0" text="¡Bienvenido a la Biblioteca!" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="74.0" />
+         </font>
+      </Label>
+      <Label fx:id="texttipo" alignment="CENTER" layoutX="477.0" layoutY="164.0" prefHeight="25.0" prefWidth="374.0" text="Seleccione un tipo de usuario" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="iconbook" fitHeight="89.0" fitWidth="89.0" layoutX="1086.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/libro%20(1).png" />
+         </image>
+      </ImageView>
+      <Line fx:id="lineabienvenida" endX="376.7098388671875" endY="1.52587890625E-5" layoutX="508.0" layoutY="165.0" startX="-100.0" startY="1.52587890625E-5" stroke="#ff914d" strokeWidth="5.0" />
+      <Pane fx:id="panelogo" layoutX="463.0" layoutY="178.0">
+         <children>
+            <ImageView fx:id="logopsm" fitHeight="193.0" fitWidth="202.0" layoutX="87.0" layoutY="57.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/logo_psm_dorado-removebg-preview.png" />
+               </image>
+               <effect>
+                  <DropShadow height="138.0" radius="58.302499999999995" spread="0.18" width="97.21" />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="logobanda" fitHeight="89.0" fitWidth="266.0" layoutX="50.0" layoutY="208.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../img/tira%20del%20logo.png" />
+               </image>
+               <effect>
+                  <DropShadow height="88.42" radius="47.3725" spread="0.2" width="103.07" />
+               </effect>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

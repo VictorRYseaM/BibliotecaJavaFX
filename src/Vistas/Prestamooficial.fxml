@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1277.0" style="-fx-border-color: 03306C;" stylesheets="@../css/prestamooficial.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PrestamosController">
+<StackPane fx:id="base" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1277.0" style="-fx-border-color: 03306C;" stylesheets="@../css/prestamooficial.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PrestamosController">
    <children>
       <AnchorPane prefHeight="445.0" prefWidth="1277.0">
          <children>
@@ -196,7 +196,7 @@
                         </AnchorPane>
                         <HBox layoutX="499.0" layoutY="458.0">
                            <children>
-                              <JFXButton prefHeight="44.0" prefWidth="144.0" style="-fx-background-color: #ffffff;" text="Ver Reportes" textFill="#03306c">
+                              <JFXButton fx:id="btnreportes" onMouseClicked="#abrirDialogoReportes" prefHeight="44.0" prefWidth="144.0" style="-fx-background-color: #ffffff;" text="Ver Reportes" textFill="#03306c">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

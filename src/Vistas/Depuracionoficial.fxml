@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1277.0" style="-fx-border-color: 03306C;" stylesheets="@../css/prestamooficial.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.DepuracionController">
+   <children>
+      <AnchorPane prefHeight="445.0" prefWidth="1277.0">
+         <children>
+            <BorderPane layoutX="88.0" layoutY="83.0" prefHeight="660.0" prefWidth="1277.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="144.0" prefWidth="1277.0" style="-fx-background-color: #03306c;" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets top="-10.0" />
+                     </padding>
+                     <children>
+                        <Line endX="228.93280029296875" endY="-1.52587890625E-5" layoutX="302.0" layoutY="111.0" startX="-140.12850952148438" startY="-3.0517578125E-5" stroke="#ff914d" strokeWidth="5.0" />
+                        <Label alignment="CENTER" layoutX="129.0" layoutY="28.0" prefHeight="69.0" prefWidth="366.0" text="Depuracion" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logopsm" fitHeight="68.0" fitWidth="80.0" layoutX="68.0" layoutY="39.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/logo_psm_dorado-removebg-preview.png" />
+                           </image>
+                           <effect>
+                              <DropShadow height="138.0" radius="58.302499999999995" spread="0.18" width="97.21" />
+                           </effect>
+                        </ImageView>
+                        <ImageView fx:id="logobanda" fitHeight="41.0" fitWidth="99.0" layoutX="51.0" layoutY="85.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../img/tira%20del%20logo.png" />
+                           </image>
+                           <effect>
+                              <DropShadow height="88.42" radius="47.3725" spread="0.2" width="103.07" />
+                           </effect>
+                        </ImageView>
+                        <ImageView fitHeight="75.0" fitWidth="79.0" layoutX="472.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../Downloads/escoba.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="512.0" prefWidth="862.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/prestamooficial.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="14.0" layoutY="20.0" prefHeight="479.0" prefWidth="844.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/prestamooficial.css">
+                           <styleClass>
+                              <String fx:value="white-form" />
+                              <String fx:value="border" />
+                              <String fx:value="table-view" />
+                              <String fx:value="column-header" />
+                              <String fx:value="column-header-background" />
+                              <String fx:value="filler" />
+                              <String fx:value="label" />
+                           </styleClass>
+                           <children>
+                              <Label layoutX="295.0" layoutY="4.0" prefHeight="45.0" prefWidth="266.0" text="Proximas Depuraciones" textFill="#03306c">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="118.360107421875" endY="-3.0517578125E-5" layoutX="439.0" layoutY="42.0" startX="-140.12850952148438" startY="-3.0517578125E-5" stroke="#ff914d" strokeWidth="5.0" />
+                              <TableView fx:id="tableDepuracion" layoutX="1.0" layoutY="61.0" prefHeight="415.0" prefWidth="839.0">
+                                <columns>
+                                  <TableColumn fx:id="columnId" prefWidth="86.0" resizable="false" text="ID Documento" />
+                                  <TableColumn fx:id="columnTitulo" prefWidth="363.0" text="Titulo de Doc" />
+                                    <TableColumn fx:id="columnFecha" prefWidth="127.0" resizable="false" text="Fecha de Ingreso" />
+                                    <TableColumn fx:id="columnTipo" prefWidth="131.0" resizable="false" text="Tipo" />
+                                    <TableColumn fx:id="columnAniosVejez" prefWidth="128.0" resizable="false" text="Años de Antiguedad" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="512.0" prefWidth="407.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/prestamooficial.css" BorderPane.alignment="CENTER">
+                     <styleClass>
+                        <String fx:value="column-header" />
+                        <String fx:value="column-header-background" />
+                     </styleClass>
+                     <children>
+                        <AnchorPane layoutX="12.0" layoutY="14.0" prefHeight="341.0" prefWidth="386.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/prestamooficial.css">
+                           <styleClass>
+                              <String fx:value="white-form" />
+                              <String fx:value="border" />
+                           </styleClass>
+                           <children>
+                              <Line endX="125.5279541015625" endY="-3.0517578125E-5" layoutX="204.0" layoutY="49.0" startX="-140.12850952148438" startY="-3.0517578125E-5" stroke="#ff914d" strokeWidth="5.0" />
+                              <Label layoutX="72.0" layoutY="4.0" prefHeight="45.0" prefWidth="248.0" text="Realizar Depuración" textFill="#03306c">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <VBox alignment="CENTER" layoutX="82.0" layoutY="82.0" prefHeight="236.0" prefWidth="230.0" spacing="40.0">
+                                 <children>
+                                    <JFXButton fx:id="btnver" onMouseClicked="#verdep" prefHeight="44.0" prefWidth="242.0" style="-fx-background-color: #fa731f;" text="Ver Depuración" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btndepurarsinmiedo" onMouseClicked="#realizardepuracion" prefHeight="44.0" prefWidth="240.0" style="-fx-background-color: #fa731f;" text="Efectuar Depuración" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        <JFXButton fx:id="btnvolver" layoutX="259.0" layoutY="424.0" onMouseClicked="#volver" prefHeight="42.0" prefWidth="105.0" style="-fx-background-color: #ffffff;" text="Volver" textFill="#03306c">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="363.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/salida-de-emergencia.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+   <styleClass>
+      <String fx:value="column-header" />
+      <String fx:value="border" />
+      <String fx:value="column-header-background" />
+      <String fx:value="filler" />
+      <String fx:value="label" />
+      <String fx:value="table-view" />
+      <String fx:value="white-form" />
+   </styleClass>
+</StackPane>

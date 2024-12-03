@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
@@ -68,6 +69,15 @@ public class Documento {
 
     public Documento() {
     }
+
+    public Documento(int id_documento, String Titulo, String Tipo, LocalDate Fecha_publicacion) {
+        this.id_documento = id_documento;
+        this.Titulo = Titulo;
+        this.Tipo = Tipo;
+        this.Fecha_publicacion = Fecha_publicacion;
+    }
+
+   
 
     public void getdatos() {
         System.out.println("\n" + id_documento);

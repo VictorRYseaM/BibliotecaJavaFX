@@ -17,7 +17,7 @@ public class EjemploFX extends Application {
    
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vistas/Login_nuevo.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Vistas/paginadeinicioporquesi.fxml"));
 
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root));

@@ -7,6 +7,7 @@ package Modelos;
 import Controladores.BuscarController;
 import Controladores.InicioController;
 import Controladores.LoginController;
+import Controladores.Login_nuevoController;
 import Controladores.RegistrarController;
 import animatefx.animation.FadeIn;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -74,6 +76,7 @@ public class StageMovement {
         new FadeIn(root).play();
 
     }
+
     public void loadpagemodificarlibro(String page, AnchorPane viewpane, Libro lib) {
         Parent root = null;
         String pag = "/Vistas/";
@@ -96,6 +99,7 @@ public class StageMovement {
         new FadeIn(root).play();
 
     }
+
     public void loadpagemodificartesis(String page, AnchorPane viewpane, TrabajoGrado tesis) {
         Parent root = null;
         String pag = "/Vistas/";
@@ -118,6 +122,7 @@ public class StageMovement {
         new FadeIn(root).play();
 
     }
+
     public void loadpagemodificarinforme(String page, AnchorPane viewpane, InformePasantia inf) {
         Parent root = null;
         String pag = "/Vistas/";
@@ -166,4 +171,6 @@ public class StageMovement {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+   
 }

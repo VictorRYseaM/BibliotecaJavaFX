@@ -7,6 +7,7 @@ package Controladores;
 import Modelos.StageMovement;
 import Modelos.Ajustesmodel;
 import Modelos.Buscarmodel;
+import Modelos.DepuracionModel;
 import Modelos.PrestamosModel;
 import Modelos.registmodel;
 import animatefx.animation.BounceIn;
@@ -92,6 +93,7 @@ public class InicioController implements Initializable {
     private registmodel rgmodel = new registmodel();
     private Buscarmodel bsmodel = new Buscarmodel();
     private PrestamosModel prmodel = new PrestamosModel();
+    private DepuracionModel dpmodel = new DepuracionModel();
 
     //@FXML
     //private ImageView imagen;
@@ -129,7 +131,7 @@ public class InicioController implements Initializable {
     }
 
     public void pagdepuracion(MouseEvent e) {
-        stmodel.loadpage("depuracion", viewpane);
+        dpmodel.loadpage("Depuracionoficial", viewpane);
     }
 
     @FXML
