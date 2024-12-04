@@ -663,4 +663,13 @@ public class PrestamosController implements Initializable {
             return documento.getNumberOfPages();
         }
     }
+
+    @FXML
+    public void cargarprestamo(Documento docu) {
+        cbbuscar.setValue(docu.getTitulo());
+        txtIdDocumento.setText(String.valueOf(docu.getId_documento())); // Mostrar ID
+        txtTipoDocumento.setText(docu.getTipo()); // Mostrar Tipo de Documento
+        PrestamosModel.establecerFechaActual(textfecha);
+
+    }
 }

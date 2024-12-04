@@ -8,6 +8,7 @@ import Modelos.StageMovement;
 import Modelos.Ajustesmodel;
 import Modelos.Documento;
 import Modelos.InformePasantia;
+import Modelos.PrestamosModel;
 import Modelos.TrabajoGrado;
 import Modelos.registmodel;
 import com.jfoenix.controls.JFXButton;
@@ -136,6 +137,11 @@ public class VistaInformeController implements Initializable {
     @FXML
     public void volver(MouseEvent e) {
         stmodel.loadpagevolverabuscar("buscar", viewp);
+    }
+    
+    @FXML
+    public void volveraestudiantes(MouseEvent e){
+        stmodel.loadpagevolverabuscarestudiantes("estudiantes", viewp);
     }
 
     @FXML
@@ -295,7 +301,7 @@ public class VistaInformeController implements Initializable {
 
     @FXML
     private void verindice(MouseEvent e) {
-        abrirDialogoImagen("Indice", informe.getIndice());
+        abrirDialogoImagen("Bibliografía", informe.getIndice());
     }
 
     private String emailFrom = "bibliotecapsmcabimas@gmail.com";
@@ -389,8 +395,8 @@ public class VistaInformeController implements Initializable {
 
             // Crear el archivo adjunto si existe
             MimeBodyPart adjunto = new MimeBodyPart();
-            if (inf.getArchivopdf() != null && inf.getArchivopdf().length > 0) {
-                DataSource fuenteDatos = new ByteArrayDataSource(inf.getArchivopdf(), "application/pdf");
+            if (inf.getResumen()!= null && inf.getResumen().length > 0) {
+                DataSource fuenteDatos = new ByteArrayDataSource(inf.getResumen(), "application/pdf");
                 adjunto.setDataHandler(new DataHandler(fuenteDatos));
                 adjunto.setFileName(inf.getTitulo() + ".pdf");
             }
@@ -426,6 +432,14 @@ public class VistaInformeController implements Initializable {
     @FXML
     private void guardararchivo(MouseEvent e) {
         informe.guardarArchivo(e, informe);
+    }
+    
+    @FXML
+    public void iraprestamos(MouseEvent e){
+        PrestamosModel p  = new PrestamosModel();
+        p.loadpageprestamo("Prestamooficial", viewp, informe);
+        
+    
     }
 
 }

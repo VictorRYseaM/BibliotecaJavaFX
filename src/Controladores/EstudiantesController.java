@@ -1,26 +1,16 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controladores;
 
 import Modelos.Buscarmodel;
 import Modelos.Documento;
-import Modelos.InformePasantia;
-import Modelos.Libro;
 import Modelos.StageMovement;
-import Modelos.TrabajoGrado;
-import animatefx.animation.FadeIn;
-import animatefx.animation.FadeInLeft;
 import animatefx.animation.FadeInRight;
-import animatefx.animation.GlowBackground;
-import animatefx.animation.Pulse;
-import animatefx.animation.Tada;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXToolbar;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -29,13 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -46,25 +33,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
- * FXML Controller class
  *
  * @author VictorY
  */
-public class BuscarController implements Initializable {
+public class EstudiantesController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     @FXML
     private VBox itemholder = null;
     @FXML
     private AnchorPane panetoolbar;
     @FXML
     private ScrollPane scroll;
+    @FXML
     private AnchorPane viewp;
 
     private HBox toolbarContent;
@@ -90,7 +73,7 @@ public class BuscarController implements Initializable {
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Mostrar barra vertical cuando sea necesario
         scroll.setFitToWidth(true); // Ajustar contenido al ancho del ScrollPane
 
-// Crear los nodos dinámicamente
+        // Crear los nodos dinámicamente
         /*
         Node[] nodes = new Node[10]; // Puedes cambiar 10 por la cantidad que necesites
 
@@ -433,16 +416,17 @@ public class BuscarController implements Initializable {
         try {
 
             if (document.getTipo().equalsIgnoreCase("Libros")) {
-                busquedamdl.loadpagelibro("visualizaciondellibro", viewp, document.getId_documento());
+                busquedamdl.loadpagelibro("estudianteslibros", viewp, document.getId_documento());
             } else if (document.getTipo().equalsIgnoreCase("Trabajos de Grado")) {
                 System.out.println("Se selecciono un trabajo de grado");
-                busquedamdl.loadpagetesis("visualizaciontrabajosdegrado2", viewp, document.getId_documento());
+                busquedamdl.loadpagetesis("estudiantestesis", viewp, document.getId_documento());
             } else if (document.getTipo().equalsIgnoreCase("Informes de Pasantia") || document.getTipo().equalsIgnoreCase("Informes de Pasantía")) {
-                busquedamdl.loadpageinforme("vistapasantias", viewp, document.getId_documento());
+                busquedamdl.loadpageinforme("estudiantespasantias", viewp, document.getId_documento());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

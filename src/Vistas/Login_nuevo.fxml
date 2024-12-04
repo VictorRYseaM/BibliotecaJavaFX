@@ -3,42 +3,141 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1280.0" styleClass="linear-grad2" stylesheets="@../css/Lgoin.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.Login_nuevoController">
    <children>
       <Line endX="100.0" layoutX="781.0" layoutY="326.0" rotate="90.0" startX="-463.8296813964844" stroke="#ff914d" strokeWidth="5.0" />
-      
-      <JFXButton layoutX="765.0" layoutY="477.0" text="Forgot Password ?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="971.0" layoutY="478.0" text="Questions ?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="btningresar" layoutX="745.0" layoutY="393.0" onAction="#PantallaInicio" prefHeight="55.0" prefWidth="380.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Ingresar" textFill="#fbfcfc">
-         <font>
-            <Font name="Open Sans Bold" size="19.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXTextField fx:id="txtuser" focusColor="#fa731f" layoutX="745.0" layoutY="180.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="380.0" promptText="Usuario" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
-         <font>
-            <Font name="Open Sans Regular" size="19.0" />
-         </font>
-      </JFXTextField>
+      <StackPane layoutX="697.0" layoutY="86.0" prefHeight="473.0" prefWidth="458.0">
+         <children>
+            <VBox fx:id="vboxingreso" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="375.0" prefWidth="458.0" spacing="30.0">
+               <children>
+                  <JFXTextField fx:id="txtuser" focusColor="#fa731f" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="380.0" promptText="Usuario" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+                     <font>
+                        <Font name="Open Sans Regular" size="19.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXPasswordField fx:id="txtpass" focusColor="#fa731f" prefHeight="42.0" prefWidth="380.0" promptText="Contraseña" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+                     <font>
+                        <Font name="Open Sans Regular" size="19.0" />
+                     </font>
+                  </JFXPasswordField>
+                  <JFXButton fx:id="btningresar" alignment="CENTER" onAction="#PantallaInicio" prefHeight="55.0" prefWidth="380.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Ingresar" textFill="#fbfcfc">
+                     <font>
+                        <Font name="Open Sans Bold" size="19.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  
+                              <JFXButton fx:id="btnolvidado" onAction="#olvidado" text="¿Olvidó la contraseña?" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <VBox fx:id="vboxpregunta" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="375.0" prefWidth="458.0" spacing="30.0" visible="false">
+               <children>
+                  <Label text="Pregunta de Seguridad" textFill="WHITE">
+                     <font>
+                        <Font name="Open Sans Regular" size="25.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="textpregunta" editable="false" focusColor="#fa731f" layoutX="10.0" layoutY="118.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="380.0" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+                     <font>
+                        <Font name="Open Sans Regular" size="19.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="textrespuesta" focusColor="#fa731f" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="380.0" promptText="Ingrese la respuesta" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+                     <font>
+                        <Font name="Open Sans Regular" size="19.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton fx:id="btnrespuesta" alignment="CENTER" onAction="#responderpregunta" prefHeight="55.0" prefWidth="380.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Responder" textFill="#fbfcfc">
+                     <font>
+                        <Font name="Open Sans Bold" size="19.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnmeacorde" onAction="#volverlogin" text="¡Ya recordé mi Usuario y Contraseña!" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <VBox fx:id="vboxnuevouser" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="375.0" prefWidth="458.0" spacing="30.0" visible="false">
+               <children>
+                  <Label text="Nuevo Usuario y Contraseña" textFill="WHITE">
+                     <font>
+                        <Font name="Open Sans Regular" size="25.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="textnuevouser" focusColor="#fa731f" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="380.0" promptText="Nuevo Usuario" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+                     <font>
+                        <Font name="Open Sans Regular" size="19.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXPasswordField fx:id="textnuevopass1" focusColor="#fa731f" prefHeight="42.0" prefWidth="380.0" promptText="Nueva Contraseña" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+                     <font>
+                        <Font name="Open Sans Regular" size="19.0" />
+                     </font>
+                  </JFXPasswordField>
+                  <JFXPasswordField fx:id="textnuevopass2" focusColor="#fa731f" layoutX="10.0" layoutY="153.0" prefHeight="42.0" prefWidth="380.0" promptText="Confirmar Contraseña" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+                     <font>
+                        <Font name="Open Sans Regular" size="19.0" />
+                     </font>
+                  </JFXPasswordField>
+                  <JFXButton fx:id="btncambiarusuario" alignment="CENTER" minHeight="-Infinity" onAction="#regnuevouser" prefHeight="55.0" prefWidth="380.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Aceptar" textFill="#fbfcfc">
+                     <font>
+                        <Font name="Open Sans Bold" size="19.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnmeacorde2" onAction="#volverlogin" onMouseClicked="#volverlogin" text="¡Ya recordé mi Usuario y Contraseña!" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
       <Pane fx:id="panelogo" layoutX="93.0" layoutY="110.0" onMouseClicked="#animacionlogo" prefHeight="457.0" prefWidth="412.0">
          <children>
             <ImageView fx:id="logopsm" fitHeight="327.0" fitWidth="339.0" layoutX="37.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
@@ -62,10 +161,36 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <JFXPasswordField fx:id="txtpass" focusColor="#fa731f" layoutX="745.0" layoutY="267.0" prefHeight="42.0" prefWidth="380.0" promptText="Contraseña" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977">
+      <JFXButton fx:id="btninicio" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="1100.0" layoutY="551.0" onAction="#irapaginicio" prefHeight="55.0" prefWidth="147.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Volver a Inicio" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1213.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/icons8-salida-100.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgeye" fitHeight="39.0" fitWidth="53.0" layoutX="1171.0" layoutY="320.0" onMousePressed="#mostrarpass" onMouseReleased="#mostrarpass" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../img/hidden.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <JFXTextField fx:id="visibleText1" focusColor="#fa731f" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="458.0" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977" visible="false" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="242.0">
          <font>
             <Font name="Open Sans Regular" size="19.0" />
          </font>
-      </JFXPasswordField>
+      </JFXTextField>
+      <JFXTextField fx:id="visibleText2" focusColor="#fa731f" layoutX="707.0" layoutY="252.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="458.0" style="-fx-prompt-text-fill: white; -fx-text-inner-color: white;" styleClass="custom-jfx-text-field" unFocusColor="#ffa977" visible="false" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="312.0">
+         <font>
+            <Font name="Open Sans Regular" size="19.0" />
+         </font>
+      </JFXTextField>
    </children>
 </AnchorPane>

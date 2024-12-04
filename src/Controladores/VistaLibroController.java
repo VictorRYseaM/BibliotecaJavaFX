@@ -9,6 +9,7 @@ import Modelos.Ajustesmodel;
 import Modelos.Documento;
 
 import Modelos.Libro;
+import Modelos.PrestamosModel;
 import Modelos.registmodel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -140,7 +141,10 @@ public class VistaLibroController implements Initializable {
     public void volver(MouseEvent e) {
         stmodel.loadpagevolverabuscar("buscar", viewp);
     }
-
+    @FXML
+    public void volveraestudiantes(MouseEvent e){
+        stmodel.loadpagevolverabuscarestudiantes("estudiantes", viewp);
+    }
     @FXML
     public void editar(MouseEvent e) {
 
@@ -382,8 +386,8 @@ public class VistaLibroController implements Initializable {
 
             // Crear el archivo adjunto si existe
             MimeBodyPart adjunto = new MimeBodyPart();
-            if (libro.getArchivopdf() != null && libro.getArchivopdf().length > 0) {
-                DataSource fuenteDatos = new ByteArrayDataSource(libro.getArchivopdf(), "application/pdf");
+            if (libro.getResumen()!= null && libro.getResumen().length > 0) {
+                DataSource fuenteDatos = new ByteArrayDataSource(libro.getResumen(), "application/pdf");
                 adjunto.setDataHandler(new DataHandler(fuenteDatos));
                 adjunto.setFileName(libro.getTitulo() + ".pdf");
             }
@@ -420,5 +424,12 @@ public class VistaLibroController implements Initializable {
     private void guardararchivo(MouseEvent e) {
         libro.guardarArchivo(e, libro);
     }
-
+    
+    @FXML
+    public void iraprestamos(MouseEvent e){
+        PrestamosModel p  = new PrestamosModel();
+        p.loadpageprestamo("Prestamooficial", viewp, libro);
+        
+    
+    }
 }

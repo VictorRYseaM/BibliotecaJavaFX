@@ -8,6 +8,7 @@ import Modelos.StageMovement;
 import Modelos.Ajustesmodel;
 import Modelos.Documento;
 import Modelos.Libro;
+import Modelos.PrestamosModel;
 import Modelos.TrabajoGrado;
 import Modelos.registmodel;
 import com.jfoenix.controls.JFXButton;
@@ -143,12 +144,23 @@ public class VistaTesisController implements Initializable {
             System.out.println("No se pasó ningún objeto al controlador.");
         }
     }
+    
+    @FXML
+    public void iraprestamos(MouseEvent e){
+        PrestamosModel p  = new PrestamosModel();
+        p.loadpageprestamo("Prestamooficial", viewp, tesis);
+        
+    
+    }
 
     @FXML
     public void volver(MouseEvent e) {
         stmodel.loadpagevolverabuscar("buscar", viewp);
     }
-
+    @FXML
+    public void volveraestudiantes(MouseEvent e){
+        stmodel.loadpagevolverabuscarestudiantes("estudiantes", viewp);
+    }
     @FXML
     public void editar(MouseEvent e) {
 
@@ -295,7 +307,7 @@ public class VistaTesisController implements Initializable {
 
     @FXML
     private void verindice(MouseEvent e) {
-        abrirDialogoImagen("Indice", tesis.getIndice());
+        abrirDialogoImagen("Bibliografía", tesis.getIndice());
     }
 
     private String emailFrom = "bibliotecapsmcabimas@gmail.com";
@@ -389,8 +401,8 @@ public class VistaTesisController implements Initializable {
 
             // Crear el archivo adjunto si existe
             MimeBodyPart adjunto = new MimeBodyPart();
-            if (tesis.getArchivopdf() != null && tesis.getArchivopdf().length > 0) {
-                DataSource fuenteDatos = new ByteArrayDataSource(tesis.getArchivopdf(), "application/pdf");
+            if (tesis.getResumen()!= null && tesis.getResumen().length > 0) {
+                DataSource fuenteDatos = new ByteArrayDataSource(tesis.getResumen(), "application/pdf");
                 adjunto.setDataHandler(new DataHandler(fuenteDatos));
                 adjunto.setFileName(tesis.getTitulo() + ".pdf");
             }

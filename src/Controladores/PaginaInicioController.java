@@ -20,12 +20,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -115,7 +119,28 @@ public class PaginaInicioController implements Initializable {
 
     @FXML
     void estudiantes(ActionEvent event) {
+        // Crear el cuadro de diálogo de confirmación
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText("¿Seguro que desea proceder?");
+        alert.setContentText("No podrá volver a la pantalla de inicio por motivos de seguridad y tendrá que reiniciar el programa.\n"
+                + "Para los evaluadores del programa, se recomienda abrir primero la vista de administración.");
 
+        // Agregar los botones de "Aceptar" y "Cancelar"
+        ButtonType botonAceptar = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+        ButtonType botonCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(botonAceptar, botonCancelar);
+
+        // Esperar la respuesta del usuario
+        alert.showAndWait().ifPresent(respuesta -> {
+            if (respuesta == botonAceptar) {
+                // Cambiar de vista si el usuario confirma
+                cargarventanas("/Vistas/estudiantes.fxml", "¡Realiza tu búsqueda!");
+            } else {
+                // Mensaje opcional al cancelar
+                System.out.println("El usuario canceló el cambio de vista.");
+            }
+        });
     }
 
     @FXML
@@ -129,6 +154,31 @@ public class PaginaInicioController implements Initializable {
             Stage loginStage = new Stage();
             loginStage.setScene(new Scene(root));
             loginStage.setTitle("Login");
+
+            // Mostrar la nueva ventana
+            loginStage.show();
+
+            // Cerrar la ventana actual si es necesario
+            Stage currentStage = (Stage) btningresar.getScene().getWindow();
+            currentStage.close();
+            new FadeIn(root).play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void cargarventanas(String dir, String Titulo) {
+        try {
+            // Cargar la vista de login desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(dir));
+            Parent root = loader.load();
+
+            // Crear y mostrar la nueva ventana (Stage)
+            Stage loginStage = new Stage();
+            loginStage.initStyle(StageStyle.UNDECORATED);
+            loginStage.setScene(new Scene(root));
+            loginStage.setTitle(Titulo);
 
             // Mostrar la nueva ventana
             loginStage.show();

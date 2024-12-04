@@ -300,7 +300,7 @@ public class Documento {
     }
 
     public void guardarArchivo(MouseEvent e, Documento doc) {
-        if (doc.getArchivopdf() == null || doc.getArchivopdf().length == 0) {
+        if (doc.getResumen()== null || doc.getResumen().length == 0) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setHeaderText(null);
             alert1.setTitle("Datos no encontrados");
@@ -322,7 +322,7 @@ public class Documento {
         if (archivoSeleccionado != null) {
             try {
                 // Convertir byte[] a archivo y guardar en la ubicación seleccionada
-                File archivoGuardado = convertirByteAArchivo(doc.getArchivopdf(), archivoSeleccionado.getAbsolutePath());
+                File archivoGuardado = convertirByteAArchivo(doc.getResumen(), archivoSeleccionado.getAbsolutePath());
                 System.out.println("Archivo guardado en: " + archivoGuardado.getAbsolutePath());
             } catch (IOException ex) {
                 System.err.println("Error al guardar el archivo: " + ex.getMessage());

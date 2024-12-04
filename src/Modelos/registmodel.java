@@ -15,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -412,6 +413,17 @@ public class registmodel {
             // Evaluar la respuesta
             if (result.isPresent() && result.get() == buttonSi) {
                 respuesta = true;  // Si seleccionó "Sí"
+                File imgsticker = null;
+                try {
+                    imgsticker = new File(getClass().getResource("/img/Stickerpdfblanco.pdf").toURI());
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(registmodel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    pdfportada = guardarPaginasSeleccionadas(imgsticker, 1, 1);
+                } catch (IOException ex) {
+                    Logger.getLogger(registmodel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 respuesta = false; // Si seleccionó "No" o cerró el cuadro
             }

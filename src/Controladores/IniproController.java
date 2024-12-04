@@ -5,9 +5,16 @@
 package Controladores;
 
 import Modelos.ChartsModel;
+import Modelos.PrestamosModel;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.skins.FlatSkin;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,6 +22,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
@@ -52,10 +61,14 @@ public class IniproController implements Initializable {
     private Button prueba;
 
     private ChartsModel estadisticas = new ChartsModel();
+    private final PrestamosModel datosprestamos = new PrestamosModel();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    
+        estadisticas.llenarlinechart(linepresta);
+        linepresta.setTitle("Cantidad de Préstamos por Mes");
+
         // Instancia para el stacktesis
         Gauge progressCircleTesis = new Gauge();
         progressCircleTesis.setSkin(new FlatSkin(progressCircleTesis));
@@ -80,7 +93,6 @@ public class IniproController implements Initializable {
         iniciarAnimacion(progressCircleTesis);
         iniciarAnimacion(progressCircleInformes);
         iniciarAnimacion(progressCircleLibros);
-        estadisticas.llenarlinechart(linepresta);
         estadisticas.cargarEstadisticasBarChart(barras);
         estadisticas.cambiarColoresBarras(barras);
         estadisticas.animarBarrasConTimeline(barras);
@@ -111,4 +123,6 @@ public class IniproController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE); // Repetir indefinidamente
         timeline.play(); // Iniciar el timeline
     }
+    
+    
 }

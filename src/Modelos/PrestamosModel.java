@@ -21,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,28 @@ public class PrestamosModel {
             root = load.load();
             PrestamosController ac = load.getController();
             ac.setviewpane(viewpane);
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+    public void loadpageprestamo(String page, AnchorPane viewpane, Documento doc) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            PrestamosController ac = load.getController();
+            ac.setviewpane(viewpane);
+            ac.cargarprestamo(doc);
 
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -302,5 +325,31 @@ public class PrestamosModel {
         documento.close();
 
         return archivoTemporal;
+    }
+
+    public int obtenerCantidadPrestamosPorMes(int anio, int mes) {
+        int cantidadPrestamos = 0;
+
+        String sqlConsulta = "SELECT COUNT(*) AS cantidad "
+                + "FROM prestamo "
+                + "WHERE YEAR(fecha_prestamo) = ? AND MONTH(fecha_prestamo) = ?";
+
+        try (Connection con = new Conexion().conectar(); PreparedStatement pst = con.prepareStatement(sqlConsulta)) {
+
+            pst.setInt(1, anio);
+            pst.setInt(2, mes);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    cantidadPrestamos = rs.getInt("cantidad");
+                    System.out.println("Cantidad de préstamos en el mes " + mes + ": " + cantidadPrestamos);
+                } else {
+                    System.out.println("No se encontraron resultados para el mes " + mes);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return cantidadPrestamos;
     }
 }

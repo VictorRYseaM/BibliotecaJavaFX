@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -44,7 +45,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                  <JFXTextField fx:id="textuser1" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                   <Label prefHeight="28.0" prefWidth="318.0" text="Nueva Contraseña" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -53,8 +54,8 @@
                         <Insets top="50.0" />
                      </padding>
                   </Label>
-                  <JFXTextField focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
-                  <Label prefHeight="28.0" prefWidth="318.0" text="Nuevo Correo" textFill="WHITE">
+                  <JFXPasswordField fx:id="textpass1" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                  <Label prefHeight="28.0" prefWidth="318.0" text="Nueva Pregunta Secreta" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -62,7 +63,7 @@
                         <Insets top="50.0" />
                      </padding>
                   </Label>
-                  <JFXTextField focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                  <JFXTextField fx:id="textpregunta" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                </children>
             </VBox>
             <VBox prefHeight="336.0" prefWidth="310.0">
@@ -72,7 +73,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                  <JFXTextField fx:id="textuser2" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                   <Label prefHeight="28.0" prefWidth="318.0" text="Confirmar Contraseña" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -81,8 +82,8 @@
                         <Insets top="50.0" />
                      </padding>
                   </Label>
-                  <JFXTextField focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
-                  <Label prefHeight="28.0" prefWidth="318.0" text="Confirmar Correo" textFill="WHITE">
+                  <JFXPasswordField fx:id="textpass2" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                  <Label prefHeight="28.0" prefWidth="318.0" text="Respuesta Pregunta Secreta" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -90,12 +91,12 @@
                         <Insets top="50.0" />
                      </padding>
                   </Label>
-                  <JFXTextField focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
+                  <JFXTextField fx:id="textrespuesta" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
                </children>
             </VBox>
          </children>
       </HBox>
-      <JFXButton fx:id="btnguarcambios" layoutX="463.0" layoutY="549.0" prefHeight="55.0" prefWidth="380.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Guardar Cambios" textFill="#fbfcfc">
+      <JFXButton fx:id="btnguarcambios" layoutX="463.0" layoutY="549.0" onMouseClicked="#actualizardatos" prefHeight="55.0" prefWidth="380.0" style="-fx-background-color: FA731F;" stylesheets="@../css/Lgoin.css" text="Guardar Cambios" textFill="#fbfcfc">
          <font>
             <Font name="Open Sans Bold" size="19.0" />
          </font>
@@ -124,5 +125,15 @@
             <DropShadow height="88.42" radius="47.3725" spread="0.2" width="103.07" />
          </effect>
       </ImageView>
+      <ImageView fx:id="imgeye" fitHeight="39.0" fitWidth="53.0" layoutX="904.0" layoutY="556.0" onMousePressed="#mostrarpass" onMouseReleased="#mostrarpass" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="346.0">
+         <image>
+            <Image url="@../img/hidden.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <JFXTextField fx:id="visibleText1" focusColor="#fa731f" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="310.0" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="346.0" />
+      <JFXTextField fx:id="visibleText2" focusColor="#fa731f" layoutX="290.0" layoutY="356.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="310.0" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" visible="false" AnchorPane.leftAnchor="710.0" AnchorPane.topAnchor="346.0" />
    </children>
 </AnchorPane>

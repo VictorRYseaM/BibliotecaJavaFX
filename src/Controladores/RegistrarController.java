@@ -6,6 +6,7 @@ package Controladores;
 
 import Modelos.Buscarmodel;
 import Modelos.Documento;
+import Modelos.FormateadorTexto;
 import Modelos.InformePasantia;
 import Modelos.Libro;
 import Modelos.StageMovement;
@@ -70,6 +71,12 @@ public class RegistrarController implements Initializable {
 
     @FXML
     private StackPane root;
+    @FXML
+    private JFXButton btnimgindice2;
+    @FXML
+    private JFXButton btnimgportada2;
+    @FXML
+    private JFXButton btnimgresumen2;
     @FXML
     private AnchorPane base;
     @FXML
@@ -230,112 +237,6 @@ public class RegistrarController implements Initializable {
         this.viewp = viewpane;
     }
 
-    private void limitarnumerosycomasbolas(JFXTextField a) {
-
-        StringConverter<Number> converter = new NumberStringConverter();
-        TextFormatter<Number> textFormatter = new TextFormatter<>(converter, 0, change -> {
-            String newText = change.getControlNewText();
-            if (newText.matches("-?\\d*(\\,\\d*)?")) {
-                return change;
-            }
-            return null;
-        });
-
-        a.setTextFormatter(textFormatter);
-    }
-
-    @FXML
-    private void limitarCaracteres100(KeyEvent event) {
-        // Identifica el TextField que activó el evento
-        JFXTextField textField = (JFXTextField) event.getSource();
-        textField.addEventHandler(KeyEvent.KEY_TYPED, evt -> {
-            evt.consume();
-        });
-        // Verifica y bloquea si excede el límite de caracteres
-        if (textField.getText().length() >= 100) {
-            event.consume(); // Bloquea el ingreso de más caracteres
-        }
-    }
-
-    @FXML
-    private void limitarCaracteres20(KeyEvent event) {
-        // Identifica el TextField que activó el evento
-        JFXTextField textField = (JFXTextField) event.getSource();
-
-        // Verifica y bloquea si excede el límite de caracteres
-        if (textField.getText().length() >= 20) {
-            event.consume(); // Bloquea el ingreso de más caracteres
-        }
-    }
-
-    @FXML
-    private void limitarCaracteres50(KeyEvent event) {
-        // Identifica el TextField que activó el evento
-        JFXTextField textField = (JFXTextField) event.getSource();
-
-        // Verifica y bloquea si excede el límite de caracteres
-        if (textField.getText().length() >= 50) {
-            event.consume(); // Bloquea el ingreso de más caracteres
-        }
-    }
-
-    @FXML
-    private void limitarCaracteres25(KeyEvent event) {
-        // Identifica el TextField que activó el evento
-        JFXTextField textField = (JFXTextField) event.getSource();
-
-        // Verifica y bloquea si excede el límite de caracteres
-        if (textField.getText().length() >= 25) {
-            event.consume(); // Bloquea el ingreso de más caracteres
-        }
-    }
-
-    @FXML
-    private void testMethod(KeyEvent event) {
-        System.out.println("Tecla presionada: " + event.getCharacter());
-    }
-
-    @FXML
-    private void limitarNumerosYComas(KeyEvent event) {
-        // Obtén el TextField que activó el evento
-        // Obtén el TextField que activó el evento
-        TextField textField = (TextField) event.getSource();
-
-        // Obtén el carácter recién ingresado
-        String newChar = event.getCharacter();
-
-        // Imprime información para depurar
-        System.out.println("Carácter ingresado: " + newChar);
-        System.out.println("Texto actual en el TextField: " + textField.getText());
-
-        // Verifica si el nuevo carácter es un número o una coma
-        if (!newChar.matches("[0-9,]")) {
-            System.out.println("Caracter no permitido");
-
-            event.consume(); // Bloquea la entrada no válida
-            return;
-        }
-
-        // Verifica si la longitud total del texto excede el máximo
-        if (textField.getText().length() >= 40) {
-            System.out.println("Límite de caracteres alcanzado");
-            event.consume(); // Bloquea la entrada si se excede el límite de caracteres
-        }
-    }
-
-    @FXML
-    private void limitarNumerosYComasYpuntos(KeyEvent event) {
-        // Obtén el TextField que activó el evento
-        JFXTextField textField = (JFXTextField) event.getSource();
-
-        // Obtén el carácter recién ingresado
-        String newChar = event.getCharacter();
-
-        // Permite solo números, coma y respeta el límite de caracteres
-        if (!newChar.matches("[0-9,.-]") || textField.getText().length() >= 10) {
-            event.consume(); // Bloquea la entrada no válida
-        }
-    }
     //AQUI EMPIEZA EL CODIGO ARRIBA ESTAN LAS VALIDACIONES DE CAMPO
     @FXML
     private void abrirDialogo(MouseEvent event) {
@@ -343,7 +244,7 @@ public class RegistrarController implements Initializable {
         StackPane stackPane = (StackPane) base.getScene().getRoot();
 
         JFXDialogLayout contenido = new JFXDialogLayout();
-        contenido.setHeading(new javafx.scene.text.Text("Seleccione las páginas del índice"));
+        contenido.setHeading(new javafx.scene.text.Text("Seleccione las páginas de la bibliografía"));
         contenido.setPrefWidth(1000);
         contenido.setPrefHeight(600);
 
@@ -492,6 +393,7 @@ public class RegistrarController implements Initializable {
         if (registrado) {
             // Mostrar mensaje de éxito
             mostrarMensaje("Registro exitoso", "Los datos han sido registrados correctamente.");
+            Disablebuttons(true);
             imgarchivo.setImage(imgnop);
             imgindice.setImage(imgnop);
             imgportada.setImage(imgnop);
@@ -569,6 +471,7 @@ public class RegistrarController implements Initializable {
         // Verificar si se seleccionó un archivo
         if (selectedFile != null) {
             System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
+            Disablebuttons(false);
             imgarchivo.setImage(imgyes);
             imgarchivo2.setImage(imgyes);
             imgarchivo3.setImage(imgyes);
@@ -580,6 +483,22 @@ public class RegistrarController implements Initializable {
     @FXML
     public void volver(MouseEvent e) {
         stmodel.loadpage("Inipro", viewp);
+    }
+
+    @FXML
+    public void Disablebuttons(boolean a) {
+        btnimgindice.setDisable(a);
+        btnimgindice2.setDisable(a);
+        btnimgindice3.setDisable(a);
+
+        btnimgportada.setDisable(a);
+        btnimgportada3.setDisable(a);
+        btnimgportada2.setDisable(a);
+
+        btnimgresumen.setDisable(a);
+        btnimgresumen2.setDisable(a);
+        btnimgresumen3.setDisable(a);
+
     }
 
     @FXML
@@ -663,7 +582,27 @@ public class RegistrarController implements Initializable {
             cambiarPane(newValue);
         });
 
-        limitarnumerosycomasbolas(textcedula);
+        FormateadorTexto.limitarCantidadCaracteres(texttitulo, 500);
+        FormateadorTexto.limitarCantidadCaracteres(texttitulo2, 500);
+        FormateadorTexto.limitarCantidadCaracteres(texttitulo3, 500);
+
+        FormateadorTexto.limitarCantidadCaracteres(textautor, 150);
+        FormateadorTexto.limitarCantidadCaracteres(textautor2, 150);
+        FormateadorTexto.limitarCantidadCaracteres(textautor3, 150);
+
+        FormateadorTexto.limitarNumerosYPuntos(codtesis, 20);
+        FormateadorTexto.limitarCantidadCaracteres(textempresa, 50);
+        FormateadorTexto.limitarCantidadCaracteres(texteditorial, 50);
+        FormateadorTexto.limitarCantidadCaracteres(textedicion, 20);
+        FormateadorTexto.limitarCantidadCaracteres(textlomo, 25);
+
+        FormateadorTexto.aplicarMascaraEntrada(textcedula, 80);
+        FormateadorTexto.aplicarMascaraEntrada(textcedula2, 80);
+
+        FormateadorTexto.limitarNumerosYPuntos(textestante, 10);
+        
+
+        Disablebuttons(true);
         //registrarmodel.configurarDatePicker(fecha);
     }
 
@@ -692,15 +631,16 @@ public class RegistrarController implements Initializable {
 
             if (paneToHide != null && paneToHide != finalPaneToShow) {
                 final Pane finalPaneToHide = paneToHide; // Hacerlo "efectivamente final"
-
+                Disablebuttons(true);
                 datosnuevapagina(elec);
                 // Crear animación para ocultar el pane actual
                 finalPaneToHide.setVisible(false);
                 finalPaneToShow.setVisible(true);
                 new FadeIn(finalPaneToShow).play();
-             
+
             } else if (paneToHide == null) {
                 // Si no hay un pane visible, simplemente mostrar el seleccionado
+                Disablebuttons(true);
                 datosnuevapagina(elec);
                 paneini.setVisible(false);
                 finalPaneToShow.setVisible(true);
@@ -809,7 +749,7 @@ public class RegistrarController implements Initializable {
         btnregistrar3.setOnMouseClicked(e -> modificarLibro());
         btnvolver.setOnMouseClicked(e -> volveralibro());
         // Configurar el ComboBox
-
+        Disablebuttons(false);
     }
 
     @FXML
@@ -897,6 +837,7 @@ public class RegistrarController implements Initializable {
         btnvolver.setOnMouseClicked(e -> volveratesis());
         // Configurar el ComboBox
 
+        Disablebuttons(false);
     }
 
     @FXML
@@ -984,6 +925,7 @@ public class RegistrarController implements Initializable {
         btnvolver.setOnMouseClicked(e -> volverainforme());
         // Configurar el ComboBox
 
+        Disablebuttons(false);
     }
 
     @FXML

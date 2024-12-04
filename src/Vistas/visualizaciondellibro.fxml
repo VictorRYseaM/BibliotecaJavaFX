@@ -206,7 +206,7 @@
                                     <Image url="@../img/ver-lista.png" />
                                  </image>
                               </ImageView>
-                              <JFXButton fx:id="btnindice" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#verindice" prefHeight="42.0" prefWidth="152.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Ver Indice" textFill="#fbfcfc">
+                              <JFXButton fx:id="btnindice" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#verindice" prefHeight="42.0" prefWidth="180.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Ver Bibliografía" textFill="#fbfcfc">
                                  <font>
                                     <Font name="Open Sans Bold" size="19.0" />
                                  </font>
@@ -307,7 +307,7 @@
                                     <Insets top="30.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <JFXButton fx:id="btnvolver111111" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#volver" prefHeight="42.0" prefWidth="196.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Prestamo" textFill="#fbfcfc">
+                              <JFXButton fx:id="btnvolver111111" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#iraprestamos" prefHeight="42.0" prefWidth="196.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Prestamo" textFill="#fbfcfc">
                                  <font>
                                     <Font name="Open Sans Bold" size="19.0" />
                                  </font>

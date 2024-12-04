@@ -47,7 +47,7 @@ public class DepuracionModel {
 
     }
 
-    public ObservableList<DocumentoDepuracion> cargarDocumentos() throws SQLException {
+    public ObservableList<DocumentoDepuracion> cargarDocumentos(boolean docu) throws SQLException {
         ObservableList<DocumentoDepuracion> documentos = FXCollections.observableArrayList();
         String sql = "SELECT id_documento, titulo, fecha_publicacion, tipo FROM documento WHERE fecha_publicacion <= ?";
 
@@ -63,7 +63,7 @@ public class DepuracionModel {
                     String titulo = rs.getString("titulo");
                     LocalDate fechaPublicacion = rs.getTimestamp("fecha_publicacion").toLocalDateTime().toLocalDate();
                     String tipo = rs.getString("tipo");
-
+                    docu=true;
                     // Calcular años de vejez
                     int aniosVejez = LocalDate.now().getYear() - fechaPublicacion.getYear();
 

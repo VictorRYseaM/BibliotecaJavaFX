@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javax.imageio.ImageIO;
@@ -103,6 +105,17 @@ public class Buscarmodel {
     }
 
     public List<Documento> buscarDocumentos(String textoBusqueda, String tipoFiltro, Map<String, String> filtrosAdicionales) {
+        // Verificar si el texto de búsqueda y los filtros adicionales están vacíos
+        if ((textoBusqueda == null || textoBusqueda.isEmpty()) && (filtrosAdicionales == null || filtrosAdicionales.isEmpty()) && (tipoFiltro == null || tipoFiltro.isEmpty() || tipoFiltro.equalsIgnoreCase("Todos"))) {
+            // Mostrar una alerta si no hay filtros ni texto de búsqueda
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Información de Búsqueda");
+            alert.setHeaderText(null);
+            alert.setContentText("No ha ingresado datos para realizar la búsqueda. Por favor, ingrese un texto de búsqueda o active un filtro.");
+            alert.showAndWait();
+            return new ArrayList<>();
+        }
+
         List<Documento> resultados = new ArrayList<>();
         String sqlBase = "SELECT id_documento, titulo, autor, img_portada, tipo FROM documento";
 
@@ -291,9 +304,9 @@ public class Buscarmodel {
             FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
             root = load.load();
             VistaTesisController ac = load.getController();
-            if(ac==null){
+            if (ac == null) {
                 System.out.println("No se pudo obtener un controlador de la vista");
-            }else{
+            } else {
                 System.out.println("Controlador obtenido");
             }
             ac.setviewpane(viewpane);
@@ -387,7 +400,7 @@ public class Buscarmodel {
                     tesis.setCarrera(rs.getString("carrera"));
                     tesis.setCodigo(rs.getString("codigo"));
                     tesis.setCedula(rs.getString("cedula"));
-                }else{
+                } else {
                     System.out.println("NO se encontro un carajo e tesis");
                 }
             }

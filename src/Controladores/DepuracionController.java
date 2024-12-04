@@ -88,9 +88,10 @@ public class DepuracionController implements Initializable {
 
     @FXML
     public void verdep(MouseEvent e) {
+        boolean haydocu=false;
         try {
-            ObservableList<DocumentoDepuracion> documentos = dao.cargarDocumentos();
-            if (documentos == null) {
+            ObservableList<DocumentoDepuracion> documentos = dao.cargarDocumentos(haydocu);
+            if (!haydocu) {
                 mostrarAlertaInfo("Atención", "No hay documentos para depurar.");
             } else {
                 tableDepuracion.setItems(documentos);

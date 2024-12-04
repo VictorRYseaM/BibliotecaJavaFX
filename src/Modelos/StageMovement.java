@@ -5,6 +5,7 @@
 package Modelos;
 
 import Controladores.BuscarController;
+import Controladores.EstudiantesController;
 import Controladores.InicioController;
 import Controladores.LoginController;
 import Controladores.Login_nuevoController;
@@ -65,6 +66,27 @@ public class StageMovement {
             FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
             root = load.load();
             BuscarController ac = load.getController();
+            ac.setviewpane(viewpane);
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(InicioController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        viewpane.getChildren().clear();
+        viewpane.getChildren().add(root);
+        new FadeIn(root).play();
+
+    }
+    public void loadpagevolverabuscarestudiantes(String page, AnchorPane viewpane) {
+        Parent root = null;
+        String pag = "/Vistas/";
+
+        pag += page;
+
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource(pag + ".fxml"));
+            root = load.load();
+            EstudiantesController ac = load.getController();
             ac.setviewpane(viewpane);
 
         } catch (IOException ex) {

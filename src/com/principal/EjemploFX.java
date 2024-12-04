@@ -19,7 +19,7 @@ public class EjemploFX extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/Vistas/paginadeinicioporquesi.fxml"));
 
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("¡Bienvenido!");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();

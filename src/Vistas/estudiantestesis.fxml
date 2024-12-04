@@ -48,7 +48,7 @@
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" visible="false">
                                  <children>
                                     <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -197,7 +197,7 @@
                                     <Image url="@../img/ver-lista.png" />
                                  </image>
                               </ImageView>
-                              <JFXButton fx:id="btnindice" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#verindice" prefHeight="42.0" prefWidth="185.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Ver Bibliografía" textFill="#fbfcfc">
+                              <JFXButton fx:id="btnindice" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#verindice" prefHeight="42.0" prefWidth="176.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Ver Bibliografía" textFill="#fbfcfc">
                                  <font>
                                     <Font name="Open Sans Bold" size="19.0" />
                                  </font>
@@ -230,7 +230,7 @@
                               <Insets top="-20.0" />
                            </padding>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0" visible="false">
                            <children>
                               <ImageView fitHeight="44.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -259,7 +259,7 @@
                               <Insets top="-80.0" />
                            </padding>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0" visible="false">
                            <children>
                               <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -288,7 +288,7 @@
                               <Insets bottom="20.0" right="20.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0" visible="false">
                            <children>
                               <ImageView fitHeight="38.0" fitWidth="53.0" pickOnBounds="true">
                                  <image>
@@ -298,7 +298,7 @@
                                     <Insets top="30.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <JFXButton fx:id="btnvolver111111" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#iraprestamos" prefHeight="42.0" prefWidth="196.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Prestamo" textFill="#fbfcfc">
+                              <JFXButton fx:id="btnvolver111111" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" onMouseClicked="#volver" prefHeight="42.0" prefWidth="196.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Prestamo" textFill="#fbfcfc">
                                  <font>
                                     <Font name="Open Sans Bold" size="19.0" />
                                  </font>
@@ -334,7 +334,7 @@
                   <Image url="@../img/icons8-salida-100.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btnvolver" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="942.0" layoutY="85.0" onMouseClicked="#volver" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Volver" textFill="#fbfcfc">
+            <JFXButton fx:id="btnvolver" alignment="BASELINE_LEFT" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="942.0" layoutY="85.0" onMouseClicked="#volveraestudiantes" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #03306C;" stylesheets="@../css/Lgoin.css" text="Volver" textFill="#fbfcfc">
                <font>
                   <Font name="Open Sans Bold" size="19.0" />
                </font>
