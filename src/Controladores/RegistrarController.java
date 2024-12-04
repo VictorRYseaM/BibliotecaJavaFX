@@ -594,7 +594,7 @@ public class RegistrarController implements Initializable {
         FormateadorTexto.limitarCantidadCaracteres(textempresa, 50);
         FormateadorTexto.limitarCantidadCaracteres(texteditorial, 50);
         FormateadorTexto.limitarCantidadCaracteres(textedicion, 20);
-        FormateadorTexto.limitarCantidadCaracteres(textlomo, 25);
+        FormateadorTexto.limitarNumerosYPuntos(textlomo, 25);
 
         FormateadorTexto.aplicarMascaraEntrada(textcedula, 80);
         FormateadorTexto.aplicarMascaraEntrada(textcedula2, 80);

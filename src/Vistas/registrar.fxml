@@ -514,7 +514,7 @@
                                  </padding>
                               </Label>
                               <JFXTextField fx:id="textestante" focusColor="#fa731f" styleClass="custom-jfx-text-field2" stylesheets="@../css/Lgoin.css" unFocusColor="#ffa977" />
-                              <Label prefHeight="28.0" prefWidth="318.0" text="Código de Lomo" textFill="WHITE">
+                              <Label prefHeight="28.0" prefWidth="318.0" text="Cantidad de Libros" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>

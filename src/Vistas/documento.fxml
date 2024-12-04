@@ -16,9 +16,9 @@
                   <Image url="@../img/perrito%20tiste.jpg" />
                </image>
             </ImageView>
-            <Label fx:id="labelv" prefHeight="61.0" prefWidth="1088.0" text="Label">
+            <Label fx:id="labelv" prefHeight="100.0" prefWidth="1088.0" text="Label" textAlignment="JUSTIFY" wrapText="true">
                <font>
-                  <Font name="Open Sans Regular" size="33.0" />
+                  <Font name="Open Sans Regular" size="16.0" />
                </font>
             </Label>
          </children>
