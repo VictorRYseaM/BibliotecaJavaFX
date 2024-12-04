@@ -143,6 +143,7 @@ public class Login_nuevoController implements Initializable {
 
             // Crea y configura el Stage
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo psm dorado sin fondo.png")));
             stage.setTitle(titulo);
             stage.setScene(new Scene(root));
             stage.setResizable(false);

@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -178,6 +179,7 @@ public class StageMovement {
 
             // Crea y configura el Stage contenedor de nivel superior que contiene escenas
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo psm dorado sin fondo.png")));
             stage.setTitle(titulo);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(root)); // se le asigna una escena a un stage

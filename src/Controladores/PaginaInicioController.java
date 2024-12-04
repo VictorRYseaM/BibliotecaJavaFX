@@ -24,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -152,6 +153,7 @@ public class PaginaInicioController implements Initializable {
 
             // Crear y mostrar la nueva ventana (Stage)
             Stage loginStage = new Stage();
+            loginStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo psm dorado sin fondo.png")));
             loginStage.setScene(new Scene(root));
             loginStage.setTitle("Login");
 
@@ -176,6 +178,7 @@ public class PaginaInicioController implements Initializable {
 
             // Crear y mostrar la nueva ventana (Stage)
             Stage loginStage = new Stage();
+            loginStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo psm dorado sin fondo.png")));
             loginStage.initStyle(StageStyle.UNDECORATED);
             loginStage.setScene(new Scene(root));
             loginStage.setTitle(Titulo);

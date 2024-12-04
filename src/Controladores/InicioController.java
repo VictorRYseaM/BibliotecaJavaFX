@@ -11,6 +11,7 @@ import Modelos.DepuracionModel;
 import Modelos.PrestamosModel;
 import Modelos.registmodel;
 import animatefx.animation.BounceIn;
+import animatefx.animation.FadeIn;
 import animatefx.animation.Flash;
 import animatefx.animation.Flip;
 import animatefx.animation.SlideInUp;
@@ -30,12 +31,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -95,6 +103,9 @@ public class InicioController implements Initializable {
     private PrestamosModel prmodel = new PrestamosModel();
     private DepuracionModel dpmodel = new DepuracionModel();
 
+    private double originalWidth;
+    private double originalHeight;
+
     //@FXML
     //private ImageView imagen;
     @FXML
@@ -108,9 +119,55 @@ public class InicioController implements Initializable {
         //Node n = (Node) e.getSource(); aqui no es necesario de momento
         //Stage stage = (Stage) n.getScene().getWindow();
 
-        baseventana.getScene().getWindow().hide(); // Oculta la ventana
-        Platform.exit(); // Cierra completamente la aplicación
+        //baseventana.getScene().getWindow().hide(); // Oculta la ventana
+        //Platform.exit(); // Cierra completamente la aplicación
+        // Crear el cuadro de diálogo de confirmación
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText(null);
+        alert.setContentText("¿Seguro que desea cerrar sesión?");
 
+        // Agregar los botones de "Aceptar" y "Cancelar"
+        ButtonType botonAceptar = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+        ButtonType botonCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(botonAceptar, botonCancelar);
+
+        // Esperar la respuesta del usuario
+        alert.showAndWait().ifPresent(respuesta -> {
+            if (respuesta == botonAceptar) {
+                // Cambiar de vista si el usuario confirma
+                login();
+            } else {
+                // Mensaje opcional al cancelar
+                System.out.println("El usuario canceló el cambio de vista.");
+            }
+        });
+
+    }
+
+    @FXML
+    void login() {
+        try {
+            // Cargar la vista de login desde el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Login_nuevo.fxml"));
+            Parent root = loader.load();
+
+            // Crear y mostrar la nueva ventana (Stage)
+            Stage loginStage = new Stage();
+            loginStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo psm dorado sin fondo.png")));
+            loginStage.setScene(new Scene(root));
+            loginStage.setTitle("Login");
+
+            // Mostrar la nueva ventana
+            loginStage.show();
+
+            // Cerrar la ventana actual si es necesario
+            Stage currentStage = (Stage) menuejem.getScene().getWindow();
+            currentStage.close();
+            new FadeIn(root).play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void pagajustes(MouseEvent e) {
@@ -142,10 +199,24 @@ public class InicioController implements Initializable {
     }
 
     @FXML
-    public void maxwin(MouseEvent e) {
-        Stage stage = (Stage) baseventana.getScene().getWindow();
+    public void maxwin(MouseEvent e) { //Metodo actualizado para centrar
+        //Stage stage = (Stage) baseventana.getScene().getWindow();
         // Alterna entre pantalla completa y modo ventana
-        stage.setFullScreen(!stage.isFullScreen());
+        //stage.setFullScreen(!stage.isFullScreen());
+
+        Stage stage = (Stage) menuejem.getScene().getWindow();
+
+        // Obtén las dimensiones de la pantalla principal
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        // Calcula la posición central para la ventana original
+        double centerX = (bounds.getWidth() - stage.getWidth()) / 2;
+        double centerY = (bounds.getHeight() - stage.getHeight()) / 2;
+
+        // Restaura la posición original
+        stage.setX(centerX);
+        stage.setY(centerY);
     }
 
     /*@FXML
@@ -172,6 +243,9 @@ public class InicioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Posicion original de la ventana
+
+        //
         setviewpane();
         stmodel.loadpage("Inipro", viewpane);
         // Configurar el evento de arrastre
